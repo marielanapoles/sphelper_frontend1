@@ -1,0 +1,46 @@
+﻿@model sphelper_try1.ViewModel.Studyplan_SubjectVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <header>
+        <h1>Study Plan</h1>
+
+        <div>
+            <p>@Html.DisplayFor(model => model.StudentName), heres your studyplan for: <br>
+            @Html.DisplayFor(model => model.Qualification)
+            </p>
+            <p>National Code: @Html.DisplayFor(model => model.NationalCode)</p>
+            <p>Tafe Code: @Html.DisplayFor(model => model.TafeCode)</p>
+        </div>
+    </header><br>
+
+    <content>
+        <p>View Subjects For: </p>
+        @Html.DropDownListFor(model => model.Timing, new SelectList(Model.Timing), "", htmlAttributes: new { @class = "form-control"})
+        <br>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Subject</th>
+                    <th>Subject Description</th>
+                    <th>Status</th>
+                </tr>
+                
+                @*reusable table template*@
+                <tbody>
+                    @Html.DisplayFor(model => model.TableItems)
+                </tbody>
+                <tfoot><tr><td colspan="3">End</td></tr></tfoot>
+            </table>
+
+        <div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input type="submit" value="Select Subjects to Enroll" class="btn button color-shadow" />
+                </div>
+            </div>
+        </div><br>
+    </content>
+</div>

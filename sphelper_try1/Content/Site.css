@@ -1,0 +1,193 @@
+﻿body {
+    /*padding-top: 50px;*/
+    padding-bottom: 20px;
+    
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    /*width: 280px;*/
+}
+
+header:after{
+    margin-bottom: 2em;
+}
+
+.navbar-style {
+    border-bottom: 1px solid #c4c4c4;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: white;
+} 
+
+.logo {
+    font-weight: bold;
+    background: -webkit-linear-gradient(235deg, #ff0000, #be1428);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.buff {
+    height: 50px;
+}
+
+h2 {
+    font-weight: bold;
+}
+
+.nav-a {
+    color: #000000;
+}
+
+.login-container {
+    height: 70vh;
+    padding-top: 4em;
+    font-size: 1em;
+}
+
+.index-container {
+    padding-top: 0;
+}
+
+.index-container h1{
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.login-container p {
+    font-size: 0.9em;
+}
+
+.textfields {
+    padding: 1.5em 0;
+}
+
+.validation {
+    font-size: 0.8em;
+    color: #ff0000;
+}
+
+.button {
+    /*position: absolute;*/
+    height: 42px;
+    width: 100%;
+}
+
+.color-shadow {
+    background: linear-gradient(135deg,#ff0000,#be1428);
+    color: white;
+    border-radius: 15px;
+    font-size: 1em;
+    box-shadow: 4px 2px 8px 1px rgba(190,20,40, 0.6);
+    -moz-box-shadow: 4px 2px 8px 1px rgba(190,20,40, 0.6);
+}
+
+.transparent-shadow {
+    background: white;
+    color: black;
+    border-radius: 20px;
+    border: 1px solid #ff0000;
+    font-size: 1em;
+    box-shadow: 2px 2px 4px 0.25px rgba(190,20,40, 0.4);
+    -moz-box-shadow: 2px 2px 4px 0.25px rgba(190,20,40, 0.4);
+}
+
+.seekadvice-shadow {
+    height: 3em;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    padding: 0.5em 1em;
+    margin-bottom: 2em;
+}
+
+.seekadvice-shadow:focus {
+    box-shadow: none;
+    outline: none;
+    border: 2px solid #ff0000;
+    box-shadow: 1px 2px 5px 0.5px rgba(190,20,40, 0.4);
+}
+
+.textarea:focus {
+    box-shadow: none;
+    outline: none;
+    border-bottom: 2px solid #ff0000 ;
+}
+
+.seekadvice-header {
+    margin-bottom: 2em
+}
+
+.home-header {
+    padding: 0 0 32px 0;
+}
+
+.home-header h1 {
+    margin-top: 0;
+    font-weight: bold;
+}
+
+.home-jumbotron {
+    margin-bottom: 2.5em;
+    /*padding: 2em;*/
+}
+
+.jumbotron-text {
+    display: block;
+    padding: 1em;
+    color: white;
+    height: 118px;
+    font-size: 1.4em;
+}
+
+.home-rows {
+    margin-bottom: 1.5em;
+}
+
+.home-left {
+    margin-right: 5%;
+}
+.home-right {
+    margin-left: 5%;
+}
+
+.home-arrow 
+{
+    width: 1.2em;
+    margin-left:80%
+}
+
+.jumbotron-arrow {
+    width: 5%;
+    margin-left: 90%;
+    padding: 5% 0;
+    display: block;
+}
+
+.home-actionlink {
+    color: black;
+    font-size: 1.2em;
+    display: block;
+    padding: 1em;
+}
+
+.buff2 {
+    padding-bottom: 5em;
+}
+
+

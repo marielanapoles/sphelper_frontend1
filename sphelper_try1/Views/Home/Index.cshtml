@@ -1,0 +1,29 @@
+﻿@model sphelper_try1.Models.Student
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="home-header">
+    <h3>Hello,</h3>
+    <h1>@Html.DisplayTextFor(m => m.GivenName)</h1>
+</div>
+
+<div class="color-shadow home-jumbotron">
+    @Html.ActionLink("View Study Plan", "Index", "Studyplan_Subject", null, new { @class = "jumbotron-text" })
+    @*<div class="buff2"></div>*@
+    <a href="/Studyplan_Subject/Index" > <img src="~/Content/img/arrow1.png" class="jumbotron-arrow" /></a>
+</div>
+
+<div class="align">
+    <div class="home-rows transparent-shadow">
+        @Html.ActionLink("Select Subject", "SelectSubject", "SelectSubject", null, new { @class = "home-actionlink" })
+    </div>
+    <div class="home-rows transparent-shadow">
+        @Html.ActionLink("My CRNs", "Crn", "Home", null, new { @class = "home-actionlink" })
+    </div>
+    <div class="home-rows transparent-shadow">
+        @Html.ActionLink("Seek Advice", "SeekAdvice", "Home", null, new { @class = "home-actionlink" })
+    </div>
+</div>
+
