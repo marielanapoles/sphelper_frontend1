@@ -12,9 +12,9 @@ namespace sphelper_try1.Controllers
         private string[] Lecturers = { "IT Studies", "Kym Bond", "KT Lau" };
         public ActionResult Index()
         {
-            var student1 = new Student()
+            var student1 = new student()
             {
-                StudentId = "001061329",
+                StudentID = "001061329",
                 GivenName = "Mariela",
                 LastName = "Napoles",
                 EmailAddress = "mariela.napoles@student.tafesa.edu.au"

@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -126,17 +134,82 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\campu.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\competency.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\competency_qualification.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\competency_type.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CRNItems.cs" />
-    <Compile Include="Models\Qualification.cs" />
+    <Compile Include="Models\crn_detail.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\crn_session_timetable.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataManager\Student_StudyplanManager.cs" />
+    <Compile Include="Models\day_of_week.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\department.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lecturer.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\qualification.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SeekAdvice.cs" />
-    <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\Student_Studyplan.cs" />
-    <Compile Include="Models\Studyplan_Qualification.cs" />
-    <Compile Include="Models\Studyplan_Subject.cs" />
-    <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\SPHelperDbModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SPHelperDbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SPHelperDbModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SPHelperDbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SPHelperDbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\student.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\student_grade.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\student_studyplan.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\studyplan_qualification.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\studyplan_subject.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\subject.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubjectCheckItems.cs" />
+    <Compile Include="Models\subject_qualification.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TableItems.cs" />
-    <Compile Include="Models\Term_DateTime.cs" />
+    <Compile Include="Models\term_datetime.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\SelectStudyplanSubjectVM.cs" />
     <Compile Include="ViewModel\Studyplan_SubjectVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -151,8 +224,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\SPHelperDbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SPHelperDbModel.Context.cs</LastGenOutput>
+      <DependentUpon>SPHelperDbModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\SPHelperDbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SPHelperDbModel.edmx</DependentUpon>
+      <LastGenOutput>SPHelperDbModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\SPHelperDbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SPHelperDbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\SPHelperDbModel.edmx.diagram">
+      <DependentUpon>SPHelperDbModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -182,10 +272,11 @@
     <Content Include="Views\LogIn\Index.cshtml" />
     <Content Include="Views\Home\SeekAdvice.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\TableItems.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SubjectCheckItems.cshtml" />
+    <Content Include="Views\Studyplan_Subject\SelectSubject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -199,6 +290,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
