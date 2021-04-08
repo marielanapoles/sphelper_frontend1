@@ -190,4 +190,9 @@ h2 {
     padding-bottom: 5em;
 }
 
+.table-semgroup {
+    background: #ccc;
+    text-align: center;
+    color: #ff0000;
+}
 

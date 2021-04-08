@@ -23,7 +23,6 @@ namespace sphelper_try1.Models.DataManager
 
         public static qualification FindQualificationByStudentId(string studentId)
         {
-
             using (SpsDatabaseEntities context = new SpsDatabaseEntities())
             {
                 var query = from student_studyplan in context.student_studyplan
@@ -61,25 +60,23 @@ namespace sphelper_try1.Models.DataManager
             }
         }
 
-        public static List<TableItems> GetAllSubjectByStudyplan(string qualification)
-        {
-            using (SpsDatabaseEntities context = new SpsDatabaseEntities())
-            {
-                var query = from studyplan_subject in context.studyplan_subject
-                             join subject subject in context.subjects
-                             on studyplan_subject.SubjectCode equals subject.SubjectCode
-                             where studyplan_subject.StudyPlanCode == qualification //qualification string
-                             orderby studyplan_subject.TimingSemester, studyplan_subject.TimingSemesterTerm
-                             select new TableItems {
-                                 SubjectCode =  subject.SubjectCode,
-                                 SubjectTitle = subject.SubjectDescription,
-                                 SubjectDescription = subject.SubjectLongDescription,
-                                 Semester = studyplan_subject.TimingSemester.ToString(),
-                                 TermSemester = studyplan_subject.TimingSemesterTerm.ToString()
-                             };
-                return query.ToList();
-
-            }
-        }
+        //for this part im not 100% sure
+        //public static List<TableItems> GetAllSubjectByStudyplan(string qualification)
+        //{
+        //    using (SpsDatabaseEntities context = new SpsDatabaseEntities())
+        //    {
+        //        var query = from sp_subj in context.studyplan_subject
+        //                    join subj in context.subjects
+        //                    on sp_subj.SubjectCode equals subj.SubjectCode into subjGroup
+        //                    where sp_subj.StudyPlanCode == qualification //qualification string
+        //                    orderby sp_subj.TimingSemester, sp_subj.TimingSemesterTerm
+        //                    select new
+        //                    {
+        //                        Semester = sp_subj.TimingSemester.ToString(),
+        //                        Subjects = subjGroup.ToList()
+        //                    };
+        //        return query.ToList();
+        //    }
+        //}
     }
 }

@@ -2,18 +2,22 @@
 
 @*reusable template*@
 <tr>
-    <td> @Model.SubjectCode </td>
-    <td>
-        <div>
-            @Model.SubjectTitle
-        </div>
-        <div>
-            @Model.SubjectDescription
-        </div>
-        <div>
-            <p>Pre requisite: @Model.Prerequisite</p>
-        </div>
-    </td>
-    <td>@Model.Status</td>
+    <td class="table-semgroup" colspan="3">Semester @Html.DisplayFor(model => model.Semester)</td>
 </tr>
+@foreach (var item in @Model.Subjects)
+{
+    <tr>
+        <td> @Html.DisplayFor(model => item.SubjectCode)</td>
+        <td>
+            <div>
+                @Html.DisplayFor(model => item.SubjectTitle)
+            </div>
+            <div>
+                @Html.DisplayFor(model => item.SubjectDescription)
+            </div>
+        </td>
+        <td>FC</td>
+    </tr>
+}
+
 

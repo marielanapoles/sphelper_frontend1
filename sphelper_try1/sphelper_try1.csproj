@@ -167,6 +167,7 @@
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SeekAdvice.cs" />
+    <Compile Include="Models\semGroup.cs" />
     <Compile Include="Models\SPHelperDbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

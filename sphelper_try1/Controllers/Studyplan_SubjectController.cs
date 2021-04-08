@@ -11,39 +11,55 @@ namespace sphelper_try1.Controllers
 {
     public class Studyplan_SubjectController : Controller
     {
+        SpsDatabaseEntities db = new SpsDatabaseEntities();
         public List<TableItems> TableItems = new List<TableItems>();
 
         // GET: Studyplan_Subject
         public ActionResult Index()
         {
-            var studentId = "001061329";
+            string studentId = "001061329";
             var student = Student_StudyplanManager.FindStudentById(studentId);
             var qualification = Student_StudyplanManager.FindQualificationByStudentId(studentId);
-            var studyplan = Student_StudyplanManager.FindStudyplanByQualificaitonCode(qualification.QualCode.ToString());
-            var allsubject = Student_StudyplanManager.GetAllSubjectByStudyplan(studyplan);
+            string studyplan = Student_StudyplanManager.FindStudyplanByQualificaitonCode(qualification.QualCode.ToString());
+            //var allsubject = Student_StudyplanManager.GetAllSubjectByStudyplan(studyplan);
 
+            var query = from subj in db.subjects.ToList()
+                         join sp_subj in db.studyplan_subject.ToList()
+                         on subj.SubjectCode equals sp_subj.SubjectCode
+                         orderby sp_subj.TimingSemesterTerm
+                         where sp_subj.StudyPlanCode == studyplan
+                         select new
+                         {
+                             Semester = sp_subj.TimingSemester,
+                             SubjectCode = subj.SubjectCode,
+                             SubjectTitle = subj.SubjectDescription,
+                             SubjectDescription = subj.SubjectLongDescription,
+                         };
+            var semGroup = query.GroupBy(x => x.Semester).ToList();
+            
+            
             //tableitems 
             var tableItems = new List<TableItems>();
+            
+            //I made an instance of a List<TableItems> where I use foreach loop to add data to this list
+            foreach (var subject in semGroup)
+            {
+                tableItems.Add(new TableItems()
+                {
+                    Semester = subject.First().Semester.ToString(),
+                    Subjects = subject.Select(x => new semGroup
+                    {
+                        SubjectCode = x.SubjectCode,
+                        SubjectTitle = x.SubjectTitle,
+                        SubjectDescription = x.SubjectDescription
+                    })
+                    .ToList()
+
+                });
+            };
 
             //ViewModel instance 
             Studyplan_SubjectVM viewModel = new Studyplan_SubjectVM();
-
-            //I made an instance of a List<TableItems> where I use foreach loop to add data to this list
-            foreach (var subject in allsubject)
-            {
-                tableItems.Add(new TableItems() {
-                    TermSemester = subject.Semester.ToString(),
-                    Semester = subject.TermSemester.ToString(),
-                    SubjectCode = subject.SubjectCode,
-                    SubjectTitle = subject.SubjectTitle,
-                    SubjectDescription = subject.SubjectDescription,
-                    Prerequisite = "NA", 
-                    Status = "FC"
-                });
-
-                //add items to the dropdown list
-                viewModel.Timing.Add(subject.Semester + " " + subject.TermSemester);
-            }
 
             //Pass all the data I need from the objects to the viewmodel
             viewModel.StudentName = student.GivenName + " " + student.LastName;
