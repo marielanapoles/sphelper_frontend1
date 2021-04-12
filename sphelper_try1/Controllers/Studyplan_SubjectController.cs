@@ -62,7 +62,7 @@ namespace sphelper_try1.Controllers
             Studyplan_SubjectVM viewModel = new Studyplan_SubjectVM();
 
             //Pass all the data I need from the objects to the viewmodel
-            viewModel.StudentName = student.GivenName + " " + student.LastName;
+            viewModel.StudentName = student.GivenName;
             viewModel.Qualification = qualification.QualName;
             viewModel.NationalCode = qualification.NationalQualCode;
             viewModel.TafeCode = qualification.TafeQualCode;

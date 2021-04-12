@@ -1,6 +1,7 @@
 ﻿body {
     /*padding-top: 50px;*/
     padding-bottom: 20px;
+    /*font-size: 1em;*/
     
 }
 
@@ -121,6 +122,7 @@ h2 {
     outline: none;
     border: 2px solid #ff0000;
     box-shadow: 1px 2px 5px 0.5px rgba(190,20,40, 0.4);
+    animation: ease;
 }
 
 .textarea:focus {
@@ -190,9 +192,85 @@ h2 {
     padding-bottom: 5em;
 }
 
-.table-semgroup {
-    background: #ccc;
-    text-align: center;
-    color: #ff0000;
+.buff3 {
+    padding-bottom: 0.8em;
 }
 
+.table-semgroup {
+    background: #E5E5E5;
+    text-align: center;
+    color: #be1428;
+    line-height: 0.4em;
+    padding: 0;
+}
+
+.studyplan-h1 {
+    
+}
+
+.studyplan-p {
+    margin-bottom: 6px;
+}
+
+.studyplan-ddl select {
+    display: inline-block;
+    width: 85%;
+}
+
+.studyplan-ddl p {
+    display: inline-block;
+    width: 14%;
+    /*margin-right: 3%;*/
+}
+
+
+.studyplan-pqual {
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 0;
+}
+
+.studyplan-status {
+    text-align: center;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.desc {
+    font-size: 0.9em;
+}
+
+@media screen and (max-width: 480px) 
+{
+   h1 {
+       font-size: 24px;
+       margin: 1em 0;
+       font-weight: bold;
+   }
+
+   p {
+       font-size: 1em !important;
+   }
+
+    .studyplan-ddl select {
+        display: inline-block;
+        width: 63%;
+        height: 2.5em;
+    }
+
+    .studyplan-ddl p {
+        display: inline-block;
+        width: 35%;
+        /*margin-right: 3%;*/
+    }
+}

@@ -2,21 +2,21 @@
 
 @*reusable template*@
 <tr>
-    <td class="table-semgroup" colspan="3">Semester @Html.DisplayFor(model => model.Semester)</td>
+    <td class="table-semgroup" colspan="3" height="24">Semester @Html.DisplayFor(model => model.Semester)</td>
 </tr>
 @foreach (var item in @Model.Subjects)
 {
     <tr>
         <td> @Html.DisplayFor(model => item.SubjectCode)</td>
         <td>
-            <div>
+            <div class="buff3">
                 @Html.DisplayFor(model => item.SubjectTitle)
             </div>
-            <div>
+            <div class="desc">
                 @Html.DisplayFor(model => item.SubjectDescription)
             </div>
         </td>
-        <td>FC</td>
+        <td class="studyplan-status ">FC</td>
     </tr>
 }
 
