@@ -244,6 +244,7 @@
     <Content Include="Models\SPHelperDbModel.edmx.diagram">
       <DependentUpon>SPHelperDbModel.edmx</DependentUpon>
     </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

@@ -27,9 +27,12 @@ namespace sphelper_try1.ViewModel
         //get subjects
         public List<TableItems> TableItems { get; set; }
 
+        public List<SubjectCheckItems> SubjectCheckItems { get; set; }
+
         public Studyplan_SubjectVM()
         {
             TableItems = new List<TableItems>();
+            SubjectCheckItems = new List<SubjectCheckItems>();
             Timing = new List<string>();
         }
     }
