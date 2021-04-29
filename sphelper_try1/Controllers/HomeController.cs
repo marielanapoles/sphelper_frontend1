@@ -1,4 +1,6 @@
 ﻿using sphelper_try1.Models;
+using sphelper_try1.Models.DataManager;
+using sphelper_try1.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +12,27 @@ namespace sphelper_try1.Controllers
     public class HomeController : Controller
     {
         private string[] Lecturers = { "IT Studies", "Kym Bond", "KT Lau" };
-        public ActionResult Index()
-        {
-            var student1 = new student()
-            {
-                StudentID = "001061329",
-                GivenName = "Mariela",
-                LastName = "Napoles",
-                EmailAddress = "mariela.napoles@student.tafesa.edu.au"
-            };
+        private string s_id = "001061329";
 
-            return View(student1);
+        public ActionResult Index(string studentId)
+        {
+            studentId = s_id;
+            //get student name
+            var student = Student_StudyplanManager.FindStudentById(studentId);
+
+            //get qualification, tafecode & national code
+            var qualification = Student_StudyplanManager.FindQualificationByStudentId(studentId);
+
+            //get study plan for each student
+            string studyplan = Student_StudyplanManager.FindStudyplanByQualificaitonCode(qualification.QualCode);
+
+            var viewModel = new HomeVM();
+            viewModel.Id = studentId;
+            viewModel.Name = student.GivenName;
+            viewModel.Qualification = qualification.QualCode;
+            viewModel.StudyplanCode = studyplan;
+
+            return View(viewModel);
         }
 
         public ActionResult About()
@@ -39,11 +51,8 @@ namespace sphelper_try1.Controllers
 
         public ActionResult SeekAdvice()
         {
-            var seekadvice = new SeekAdvice()
-            {
-                Lecturers = Lecturers.ToList()
-            };
-            return View( seekadvice);
+           
+            return View();
         }
     }
 }

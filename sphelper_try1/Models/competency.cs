@@ -18,7 +18,7 @@ namespace sphelper_try1.Models
         public competency()
         {
             this.crn_detail = new HashSet<crn_detail>();
-            this.subjects = new HashSet<subject>();
+            this.subject_competency = new HashSet<subject_competency>();
         }
     
         public string TafeCompCode { get; set; }
@@ -29,6 +29,6 @@ namespace sphelper_try1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<crn_detail> crn_detail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<subject> subjects { get; set; }
+        public virtual ICollection<subject_competency> subject_competency { get; set; }
     }
 }

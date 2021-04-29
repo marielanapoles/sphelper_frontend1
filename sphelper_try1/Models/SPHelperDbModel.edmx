@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SpsDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SPHelperModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="campus">
           <Key>
             <PropertyRef Name="CampusCode" />
@@ -466,26 +466,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SpsDatabaseModelStoreContainer">
-          <EntitySet Name="campus" EntityType="Self.campus" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="competency" EntityType="Self.competency" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="competency_qualification" EntityType="Self.competency_qualification" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="competency_type" EntityType="Self.competency_type" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="crn_detail" EntityType="Self.crn_detail" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="crn_session_timetable" EntityType="Self.crn_session_timetable" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="day_of_week" EntityType="Self.day_of_week" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="department" EntityType="Self.department" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="lecturer" EntityType="Self.lecturer" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="qualification" EntityType="Self.qualification" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="student" EntityType="Self.student" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="student_grade" EntityType="Self.student_grade" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="student_studyplan" EntityType="Self.student_studyplan" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="studyplan_qualification" EntityType="Self.studyplan_qualification" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="studyplan_subject" EntityType="Self.studyplan_subject" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="subject" EntityType="Self.subject" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="subject_competency" EntityType="Self.subject_competency" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="subject_qualification" EntityType="Self.subject_qualification" Schema="admin_it_studies_dev" store:Type="Tables" />
-          <EntitySet Name="term_datetime" EntityType="Self.term_datetime" Schema="admin_it_studies_dev" store:Type="Tables" />
+        <EntityContainer Name="SPHelperModelStoreContainer">
+          <EntitySet Name="campus" EntityType="Self.campus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="competency" EntityType="Self.competency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="competency_qualification" EntityType="Self.competency_qualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="competency_type" EntityType="Self.competency_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="crn_detail" EntityType="Self.crn_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="crn_session_timetable" EntityType="Self.crn_session_timetable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="day_of_week" EntityType="Self.day_of_week" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lecturer" EntityType="Self.lecturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="qualification" EntityType="Self.qualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="student_grade" EntityType="Self.student_grade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="student_studyplan" EntityType="Self.student_studyplan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="studyplan_qualification" EntityType="Self.studyplan_qualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="studyplan_subject" EntityType="Self.studyplan_subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subject" EntityType="Self.subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subject_competency" EntityType="Self.subject_competency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subject_qualification" EntityType="Self.subject_qualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="term_datetime" EntityType="Self.term_datetime" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="competency_qualification$fk_competency_qualification_competency_type1" Association="Self.competency_qualification$fk_competency_qualification_competency_type1">
             <End Role="competency_type" EntitySet="competency_type" />
             <End Role="competency_qualification" EntitySet="competency_qualification" />
@@ -571,11 +571,10 @@
             <End Role="subject_qualification" EntitySet="subject_qualification" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SpsDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="SPHelperModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="campu">
           <Key>
             <PropertyRef Name="CampusCode" />
@@ -594,7 +593,7 @@
           <Property Name="CompetencyName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Hours" Type="Int32" Nullable="false" />
           <NavigationProperty Name="crn_detail" Relationship="Self.crn_detail_FK_CRNDetail_TafeCompCode" FromRole="competency" ToRole="crn_detail" />
-          <NavigationProperty Name="subjects" Relationship="Self.subject_competency" FromRole="competency" ToRole="subject" />
+          <NavigationProperty Name="subject_competency" Relationship="Self.subject_competency_FK_SubjComp_TafeCompCode" FromRole="competency" ToRole="subject_competency" />
         </EntityType>
         <EntityType Name="competency_qualification">
           <Key>
@@ -772,8 +771,18 @@
           <Property Name="SubjectDescription" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SubjectLongDescription" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="crn_detail" Relationship="Self.crn_detail_FK_CRNDetail_SubjectCode" FromRole="subject" ToRole="crn_detail" />
+          <NavigationProperty Name="subject_competency" Relationship="Self.subject_competency_FK_SubjComp_SubjectCode" FromRole="subject" ToRole="subject_competency" />
           <NavigationProperty Name="subject_qualification" Relationship="Self.subject_qualification_FK_SubjQual_SubjectCode" FromRole="subject" ToRole="subject_qualification" />
-          <NavigationProperty Name="competencies" Relationship="Self.subject_competency" FromRole="subject" ToRole="competency" />
+        </EntityType>
+        <EntityType Name="subject_competency">
+          <Key>
+            <PropertyRef Name="SubjectCode" />
+            <PropertyRef Name="TafeCompCode" />
+          </Key>
+          <Property Name="SubjectCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TafeCompCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="competency" Relationship="Self.subject_competency_FK_SubjComp_TafeCompCode" FromRole="subject_competency" ToRole="competency" />
+          <NavigationProperty Name="subject" Relationship="Self.subject_competency_FK_SubjComp_SubjectCode" FromRole="subject_competency" ToRole="subject" />
         </EntityType>
         <EntityType Name="subject_qualification">
           <Key>
@@ -833,6 +842,18 @@
               <PropertyRef Name="TafeCompCode" />
             </Principal>
             <Dependent Role="crn_detail">
+              <PropertyRef Name="TafeCompCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subject_competency_FK_SubjComp_TafeCompCode">
+          <End Role="competency" Type="Self.competency" Multiplicity="1" />
+          <End Role="subject_competency" Type="Self.subject_competency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="competency">
+              <PropertyRef Name="TafeCompCode" />
+            </Principal>
+            <Dependent Role="subject_competency">
               <PropertyRef Name="TafeCompCode" />
             </Dependent>
           </ReferentialConstraint>
@@ -1033,6 +1054,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="subject_competency_FK_SubjComp_SubjectCode">
+          <End Role="subject" Type="Self.subject" Multiplicity="1" />
+          <End Role="subject_competency" Type="Self.subject_competency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="subject_competency">
+              <PropertyRef Name="SubjectCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="subject_qualification_FK_SubjQual_SubjectCode">
           <End Role="subject" Type="Self.subject" Multiplicity="1" />
           <End Role="subject_qualification" Type="Self.subject_qualification" Multiplicity="*" />
@@ -1045,11 +1078,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="subject_competency">
-          <End Role="subject" Type="Self.subject" Multiplicity="*" />
-          <End Role="competency" Type="Self.competency" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="SpsDatabaseEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SPHelperEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="campus" EntityType="Self.campu" />
           <EntitySet Name="competencies" EntityType="Self.competency" />
           <EntitySet Name="competency_qualification" EntityType="Self.competency_qualification" />
@@ -1066,6 +1095,7 @@
           <EntitySet Name="studyplan_qualification" EntityType="Self.studyplan_qualification" />
           <EntitySet Name="studyplan_subject" EntityType="Self.studyplan_subject" />
           <EntitySet Name="subjects" EntityType="Self.subject" />
+          <EntitySet Name="subject_competency" EntityType="Self.subject_competency" />
           <EntitySet Name="subject_qualification" EntityType="Self.subject_qualification" />
           <EntitySet Name="term_datetime" EntityType="Self.term_datetime" />
           <AssociationSet Name="crn_detail_FK_CRNDetail_CampusCode" Association="Self.crn_detail_FK_CRNDetail_CampusCode">
@@ -1079,6 +1109,10 @@
           <AssociationSet Name="crn_detail_FK_CRNDetail_TafeCompCode" Association="Self.crn_detail_FK_CRNDetail_TafeCompCode">
             <End Role="competency" EntitySet="competencies" />
             <End Role="crn_detail" EntitySet="crn_detail" />
+          </AssociationSet>
+          <AssociationSet Name="subject_competency_FK_SubjComp_TafeCompCode" Association="Self.subject_competency_FK_SubjComp_TafeCompCode">
+            <End Role="competency" EntitySet="competencies" />
+            <End Role="subject_competency" EntitySet="subject_competency" />
           </AssociationSet>
           <AssociationSet Name="competency_qualification_fk_competency_qualification_competency_type1" Association="Self.competency_qualification_fk_competency_qualification_competency_type1">
             <End Role="competency_type" EntitySet="competency_type" />
@@ -1140,13 +1174,13 @@
             <End Role="term_datetime" EntitySet="term_datetime" />
             <End Role="student_studyplan" EntitySet="student_studyplan" />
           </AssociationSet>
+          <AssociationSet Name="subject_competency_FK_SubjComp_SubjectCode" Association="Self.subject_competency_FK_SubjComp_SubjectCode">
+            <End Role="subject" EntitySet="subjects" />
+            <End Role="subject_competency" EntitySet="subject_competency" />
+          </AssociationSet>
           <AssociationSet Name="subject_qualification_FK_SubjQual_SubjectCode" Association="Self.subject_qualification_FK_SubjQual_SubjectCode">
             <End Role="subject" EntitySet="subjects" />
             <End Role="subject_qualification" EntitySet="subject_qualification" />
-          </AssociationSet>
-          <AssociationSet Name="subject_competency" Association="Self.subject_competency">
-            <End Role="subject" EntitySet="subjects" />
-            <End Role="competency" EntitySet="competencies" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -1154,9 +1188,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SpsDatabaseModelStoreContainer" CdmEntityContainer="SpsDatabaseEntities">
+        <EntityContainerMapping StorageEntityContainer="SPHelperModelStoreContainer" CdmEntityContainer="SPHelperEntities">
           <EntitySetMapping Name="campus">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.campu">
+            <EntityTypeMapping TypeName="SPHelperModel.campu">
               <MappingFragment StoreEntitySet="campus">
                 <ScalarProperty Name="CampusCode" ColumnName="CampusCode" />
                 <ScalarProperty Name="CampusName" ColumnName="CampusName" />
@@ -1164,7 +1198,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="competencies">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.competency">
+            <EntityTypeMapping TypeName="SPHelperModel.competency">
               <MappingFragment StoreEntitySet="competency">
                 <ScalarProperty Name="TafeCompCode" ColumnName="TafeCompCode" />
                 <ScalarProperty Name="NationalCompCode" ColumnName="NationalCompCode" />
@@ -1174,7 +1208,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="competency_qualification">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.competency_qualification">
+            <EntityTypeMapping TypeName="SPHelperModel.competency_qualification">
               <MappingFragment StoreEntitySet="competency_qualification">
                 <ScalarProperty Name="QualCode" ColumnName="QualCode" />
                 <ScalarProperty Name="NationalCompCode" ColumnName="NationalCompCode" />
@@ -1183,7 +1217,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="competency_type">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.competency_type">
+            <EntityTypeMapping TypeName="SPHelperModel.competency_type">
               <MappingFragment StoreEntitySet="competency_type">
                 <ScalarProperty Name="CompTypeCode" ColumnName="CompTypeCode" />
                 <ScalarProperty Name="CompTypeDescription" ColumnName="CompTypeDescription" />
@@ -1191,7 +1225,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="crn_detail">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.crn_detail">
+            <EntityTypeMapping TypeName="SPHelperModel.crn_detail">
               <MappingFragment StoreEntitySet="crn_detail">
                 <ScalarProperty Name="CRN" ColumnName="CRN" />
                 <ScalarProperty Name="TafeCompCode" ColumnName="TafeCompCode" />
@@ -1209,7 +1243,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="crn_session_timetable">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.crn_session_timetable">
+            <EntityTypeMapping TypeName="SPHelperModel.crn_session_timetable">
               <MappingFragment StoreEntitySet="crn_session_timetable">
                 <ScalarProperty Name="CRN" ColumnName="CRN" />
                 <ScalarProperty Name="TermCodeStart" ColumnName="TermCodeStart" />
@@ -1224,7 +1258,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="day_of_week">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.day_of_week">
+            <EntityTypeMapping TypeName="SPHelperModel.day_of_week">
               <MappingFragment StoreEntitySet="day_of_week">
                 <ScalarProperty Name="DayCode" ColumnName="DayCode" />
                 <ScalarProperty Name="DayShortName" ColumnName="DayShortName" />
@@ -1233,7 +1267,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="departments">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.department">
+            <EntityTypeMapping TypeName="SPHelperModel.department">
               <MappingFragment StoreEntitySet="department">
                 <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
                 <ScalarProperty Name="Department1" ColumnName="Department" />
@@ -1241,7 +1275,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="lecturers">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.lecturer">
+            <EntityTypeMapping TypeName="SPHelperModel.lecturer">
               <MappingFragment StoreEntitySet="lecturer">
                 <ScalarProperty Name="LecturerID" ColumnName="LecturerID" />
                 <ScalarProperty Name="GivenName" ColumnName="GivenName" />
@@ -1251,7 +1285,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="qualifications">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.qualification">
+            <EntityTypeMapping TypeName="SPHelperModel.qualification">
               <MappingFragment StoreEntitySet="qualification">
                 <ScalarProperty Name="QualCode" ColumnName="QualCode" />
                 <ScalarProperty Name="NationalQualCode" ColumnName="NationalQualCode" />
@@ -1265,7 +1299,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="students">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.student">
+            <EntityTypeMapping TypeName="SPHelperModel.student">
               <MappingFragment StoreEntitySet="student">
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="GivenName" ColumnName="GivenName" />
@@ -1275,7 +1309,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="student_grade">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.student_grade">
+            <EntityTypeMapping TypeName="SPHelperModel.student_grade">
               <MappingFragment StoreEntitySet="student_grade">
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="CRN" ColumnName="CRN" />
@@ -1288,7 +1322,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="student_studyplan">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.student_studyplan">
+            <EntityTypeMapping TypeName="SPHelperModel.student_studyplan">
               <MappingFragment StoreEntitySet="student_studyplan">
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="QualCode" ColumnName="QualCode" />
@@ -1299,7 +1333,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="studyplan_qualification">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.studyplan_qualification">
+            <EntityTypeMapping TypeName="SPHelperModel.studyplan_qualification">
               <MappingFragment StoreEntitySet="studyplan_qualification">
                 <ScalarProperty Name="StudyPlanCode" ColumnName="StudyPlanCode" />
                 <ScalarProperty Name="QualCode" ColumnName="QualCode" />
@@ -1308,7 +1342,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="studyplan_subject">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.studyplan_subject">
+            <EntityTypeMapping TypeName="SPHelperModel.studyplan_subject">
               <MappingFragment StoreEntitySet="studyplan_subject">
                 <ScalarProperty Name="StudyPlanCode" ColumnName="StudyPlanCode" />
                 <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
@@ -1318,7 +1352,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="subjects">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.subject">
+            <EntityTypeMapping TypeName="SPHelperModel.subject">
               <MappingFragment StoreEntitySet="subject">
                 <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
                 <ScalarProperty Name="SubjectDescription" ColumnName="SubjectDescription" />
@@ -1326,8 +1360,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="subject_competency">
+            <EntityTypeMapping TypeName="SPHelperModel.subject_competency">
+              <MappingFragment StoreEntitySet="subject_competency">
+                <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
+                <ScalarProperty Name="TafeCompCode" ColumnName="TafeCompCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="subject_qualification">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.subject_qualification">
+            <EntityTypeMapping TypeName="SPHelperModel.subject_qualification">
               <MappingFragment StoreEntitySet="subject_qualification">
                 <ScalarProperty Name="QualCode" ColumnName="QualCode" />
                 <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
@@ -1336,7 +1378,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="term_datetime">
-            <EntityTypeMapping TypeName="SpsDatabaseModel.term_datetime">
+            <EntityTypeMapping TypeName="SPHelperModel.term_datetime">
               <MappingFragment StoreEntitySet="term_datetime">
                 <ScalarProperty Name="TermCode" ColumnName="TermCode" />
                 <ScalarProperty Name="TermYear" ColumnName="TermYear" />
@@ -1346,14 +1388,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="subject_competency" TypeName="SpsDatabaseModel.subject_competency" StoreEntitySet="subject_competency">
-            <EndProperty Name="subject">
-              <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
-            </EndProperty>
-            <EndProperty Name="competency">
-              <ScalarProperty Name="TafeCompCode" ColumnName="TafeCompCode" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

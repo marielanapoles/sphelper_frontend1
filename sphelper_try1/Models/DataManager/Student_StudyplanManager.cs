@@ -7,7 +7,7 @@ namespace sphelper_try1.Models.DataManager
     {
         public static student FindStudentById(string studentId)
         {
-            using (SpsDatabaseEntities context = new SpsDatabaseEntities())
+            using (SPHelperEntities context = new SPHelperEntities())
             {
                 var query = context.students.Where(x => x.StudentID == studentId);
                 student student1 = new student()
@@ -23,7 +23,7 @@ namespace sphelper_try1.Models.DataManager
 
         public static qualification FindQualificationByStudentId(string studentId)
         {
-            using (SpsDatabaseEntities context = new SpsDatabaseEntities())
+            using (SPHelperEntities context = new SPHelperEntities())
             {
                 var query = from student_studyplan in context.student_studyplan
                             join qualification in context.qualifications
@@ -32,12 +32,37 @@ namespace sphelper_try1.Models.DataManager
                             select new
                             {
                                 qualification.QualCode,
-                                qualification.QualName,
-                                qualification.NationalQualCode,
-                                qualification.TafeQualCode
+                                //qualification.QualName,
+                                //qualification.NationalQualCode,
+                                //qualification.TafeQualCode
 
                             };
                 qualification student_qualification = new qualification()
+                {
+                    QualCode = query.First().QualCode,
+                    //QualName = query.First().QualName,
+                    //NationalQualCode = query.First().NationalQualCode,
+                    //TafeQualCode = query.First().TafeQualCode
+                };
+
+                return student_qualification;
+            }
+        }
+
+        public static qualification FindQualificationByQualCode(string qualCode)
+        {
+            using (SPHelperEntities context = new SPHelperEntities())
+            {
+                var query = from q in context.qualifications
+                            where q.QualCode == qualCode
+                            select new 
+                            {
+                                q.QualCode,
+                                q.QualName,
+                                q.NationalQualCode,
+                                q.TafeQualCode
+                            };
+                qualification qualification = new qualification()
                 {
                     QualCode = query.First().QualCode,
                     QualName = query.First().QualName,
@@ -45,13 +70,13 @@ namespace sphelper_try1.Models.DataManager
                     TafeQualCode = query.First().TafeQualCode
                 };
 
-                return student_qualification;
+                return qualification;
             }
         }
 
         public static string FindStudyplanByQualificaitonCode(string qualCode)
         {
-            using (SpsDatabaseEntities context = new SpsDatabaseEntities())
+            using (SPHelperEntities context = new SPHelperEntities())
             {
                 var query = context.studyplan_qualification.Where(x => x.QualCode == qualCode && x.Priority == 1);
                 string studyplan = query.First().StudyPlanCode;
@@ -63,7 +88,7 @@ namespace sphelper_try1.Models.DataManager
         //for this part im not 100% sure
         //public static List<TableItems> GetAllSubjectByStudyplan(string qualification)
         //{
-        //    using (SpsDatabaseEntities context = new SpsDatabaseEntities())
+        //    using (SPHelperEntities context = new SPHelperEntities())
         //    {
         //        var query = from sp_subj in context.studyplan_subject
         //                    join subj in context.subjects

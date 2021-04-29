@@ -13,10 +13,10 @@ namespace sphelper_try1.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SpsDatabaseEntities : DbContext
+    public partial class SPHelperEntities : DbContext
     {
-        public SpsDatabaseEntities()
-            : base("name=SpsDatabaseEntities")
+        public SPHelperEntities()
+            : base("name=SPHelperEntities")
         {
         }
     
@@ -41,6 +41,7 @@ namespace sphelper_try1.Models
         public virtual DbSet<studyplan_qualification> studyplan_qualification { get; set; }
         public virtual DbSet<studyplan_subject> studyplan_subject { get; set; }
         public virtual DbSet<subject> subjects { get; set; }
+        public virtual DbSet<subject_competency> subject_competency { get; set; }
         public virtual DbSet<subject_qualification> subject_qualification { get; set; }
         public virtual DbSet<term_datetime> term_datetime { get; set; }
     }

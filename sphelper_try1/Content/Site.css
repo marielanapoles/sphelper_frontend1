@@ -109,6 +109,56 @@ h2 {
     -moz-box-shadow: 2px 2px 4px 0.25px rgba(190,20,40, 0.4);
 }
 
+.buttom-btn {
+    display: inline-block;
+    width: 15%;
+    height: 32px;
+    height: 48px;
+    padding: 16px 8px;
+    text-align: center;
+}
+.transparent-shadow-red {
+    background: linear-gradient(135deg,#ff0000,#be1428);
+    border-radius: 15px;
+    font-size: 1em;
+}
+
+.transparent-shadow-red:hover {
+   box-shadow: 4px 2px 8px 1px rgba(190,20,40, 0.6);
+    -moz-box-shadow: 4px 2px 8px 1px rgba(190,20,40, 0.6);
+}
+
+.transparent-shadow-red a {
+    color: white;
+}
+.transparent-shadow-red a:hover {
+    color: white;
+    
+}
+
+.transparent-shadow-white {
+    background: white;
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    border-radius: 15px;
+    font-size: 1em;
+    margin-right: 1%;
+    margin-left: 68.4%;
+}
+
+.transparent-shadow-white:hover {
+    box-shadow: 4px 2px 8px 1px rgba(190,20,40, 0.6);
+    -moz-box-shadow: 4px 2px 8px 1px rgba(190,20,40, 0.6);
+}
+
+.transparent-shadow-white a {
+    color: #ff0000;
+}
+    .transparent-shadow-white a:hover {
+        color: #ff0000;
+        
+    }
+
 .seekadvice-shadow {
     height: 3em;
     border-radius: 15px;
@@ -286,6 +336,12 @@ select::-ms-expand {
     color: white;
 }
 
+.cross-btn {
+    height: 16px;
+    width: 16px;
+}
+
+
 @media screen and (max-width: 480px) {
     h1 {
        font-size: 24px;
@@ -307,6 +363,28 @@ select::-ms-expand {
         display: inline-block;
         width: 35%;
         /*margin-right: 3%;*/
+    }
+
+    .buttom-btn {
+        width: 47%;
+        margin-left: 0;
+    }
+
+    .crn-button {
+        position: absolute;
+        bottom: 0;
+        width: 93%;
+        padding: 16px 0;
+    }
+
+    .transparent-shadow-white {
+        box-shadow: 4px 2px 8px 1px rgba(190,20,40, 0.6);
+        -moz-box-shadow: 4px 2px 8px 1px rgba(190,20,40, 0.6);
+    }
+
+    .transparent-shadow-red {
+        box-shadow: 4px 2px 8px 1px rgba(190,20,40, 0.6);
+        -moz-box-shadow: 4px 2px 8px 1px rgba(190,20,40, 0.6);
     }
 }
 

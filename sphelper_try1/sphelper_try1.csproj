@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CRNController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\Studyplan_SubjectController.cs" />
@@ -146,13 +147,14 @@
     <Compile Include="Models\competency_type.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CRNItems.cs" />
+    <Compile Include="Models\CrnSubject.cs" />
     <Compile Include="Models\crn_detail.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\crn_session_timetable.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataManager\CrnManager.cs" />
     <Compile Include="Models\DataManager\Student_StudyplanManager.cs" />
     <Compile Include="Models\day_of_week.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
@@ -166,7 +168,6 @@
     <Compile Include="Models\qualification.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SeekAdvice.cs" />
     <Compile Include="Models\semGroup.cs" />
     <Compile Include="Models\SPHelperDbModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -202,15 +203,22 @@
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SubjectCheckItems.cs" />
+    <Compile Include="Models\subject_competency.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\subject_qualification.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TableItems.cs" />
+    <Compile Include="Models\TableItemsCrn.cs" />
+    <Compile Include="Models\TableItemsSelectSubject.cs" />
     <Compile Include="Models\term_datetime.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\SelectStudyplanSubjectVM.cs" />
+    <Compile Include="ViewModel\CrnDetailsVM.cs" />
+    <Compile Include="ViewModel\CrnVM.cs" />
+    <Compile Include="ViewModel\HomeVM.cs" />
     <Compile Include="ViewModel\Studyplan_SubjectVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +228,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img\arrow.jpg" />
     <Content Include="Content\img\arrow1.png" />
+    <Content Include="Content\img\cross.png" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -227,8 +236,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\SPHelperDbModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SPHelperDbModel.Context.cs</LastGenOutput>
       <DependentUpon>SPHelperDbModel.edmx</DependentUpon>
+      <LastGenOutput>SPHelperDbModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\SPHelperDbModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -237,6 +246,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ClassDiagram1.cd" />
     <EntityDeploy Include="Models\SPHelperDbModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SPHelperDbModel.Designer.cs</LastGenOutput>
@@ -244,7 +254,6 @@
     <Content Include="Models\SPHelperDbModel.edmx.diagram">
       <DependentUpon>SPHelperDbModel.edmx</DependentUpon>
     </Content>
-    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -267,15 +276,16 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Studyplan_Subject\Index.cshtml" />
     <Content Include="Views\LogIn\Index.cshtml" />
     <Content Include="Views\Home\SeekAdvice.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\TableItems.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SubjectCheckItems.cshtml" />
-    <Content Include="Views\Studyplan_Subject\SelectSubject.cshtml" />
+    <Content Include="Views\CRN\Index.cshtml" />
+    <Content Include="Views\CRN\SelectSubjectForCRN.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\TableItemsSelectSubject.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\TableItemsCrn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
