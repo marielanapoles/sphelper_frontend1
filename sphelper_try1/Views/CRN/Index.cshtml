@@ -1,0 +1,44 @@
+﻿@*@model sphelper_try1.Models.TableItemsCrn*@
+@model sphelper_try1.ViewModel.CrnDetailsVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <header>
+        <h1>CRN</h1>
+
+        <div>
+            <p class="studyplan-p">We prepared the following CRN for the subject/s you selected</p>
+        </div>
+    </header><br>
+
+    <content>
+        <table class="table table-bordered">
+            <tr>
+                <th>CRN</th>
+                <th>Subject Code</th>
+                <th colspan="2">Description</th>
+            </tr>
+
+            @*reusable table template*@
+            <tbody>
+                @Html.DisplayFor(model => model.CrnTableItems)
+            </tbody>
+            <tfoot><tr><td colspan="4">End</td></tr></tfoot>
+        </table>
+        <br>
+    </content>
+    <div class="crn-button">
+        <div class="buttom-btn transparent-shadow-white">
+            @Html.ActionLink("Back", "SelectSubjectForCRN", "CRN")
+        </div>
+        <div class="buttom-btn transparent-shadow-red">
+            <a href="https://my.tafesa.edu.au/">myTAFE SA</a>
+        </div>
+    </div>
+</div>
+
+

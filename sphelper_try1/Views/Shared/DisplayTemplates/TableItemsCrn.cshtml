@@ -1,0 +1,16 @@
+﻿@model sphelper_try1.Models.TableItemsCrn
+
+<tr>
+    <td>@Html.DisplayFor(model => model.CRN)</td>
+    <td>@Html.DisplayFor(model => model.SubjectCode)</td>
+    <td>
+        <div>
+            @Html.DisplayFor(model => model.CompetencyName)
+        </div>
+        <div>
+            <p>Competency Code: @Html.DisplayTextFor(model => model.TafeCompetencyCode)</p>
+        </div>
+    </td>
+    <td><a href="@Url.Action("Delete", "CRN")"><img src="~/Content/img/cross.png" height="16" width="16"></a></td>
+</tr>
+
