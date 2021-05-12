@@ -154,10 +154,12 @@ h2 {
 .transparent-shadow-white a {
     color: #ff0000;
 }
-    .transparent-shadow-white a:hover {
+
+.transparent-shadow-white a:hover {
         color: #ff0000;
         
     }
+    
 
 .seekadvice-shadow {
     height: 3em;
@@ -199,6 +201,10 @@ h2 {
     /*padding: 2em;*/
 }
 
+.middle {
+    margin: 0 4.4%;
+}
+
 .jumbotron-text {
     display: block;
     padding: 1em;
@@ -208,7 +214,10 @@ h2 {
 }
 
 .home-rows {
-    margin-bottom: 1.5em;
+    /*margin-bottom: 1.5em;*/
+    display: inline-block;
+    width: 30%;
+    text-align: center;
 }
 
 .home-left {
@@ -225,9 +234,9 @@ h2 {
 }
 
 .jumbotron-arrow {
-    width: 5%;
-    margin-left: 90%;
-    padding: 5% 0;
+    width: 3%;
+    margin-left: 92%;
+    padding: 4.6% 0;
     display: block;
 }
 
@@ -235,8 +244,27 @@ h2 {
     color: black;
     font-size: 1.2em;
     display: block;
+    padding: 2em 0;
+}
+
+.home-actionlink:hover{
+    text-decoration: none;
+    color: black;
+}
+
+.home-actionlink-big {
+    color: white;
+    font-size: 1.2em;
+    display: block;
     padding: 1em;
 }
+
+.home-actionlink-big:hover {
+    text-decoration: none;
+    color: white;
+}
+
+
 
 .buff2 {
     padding-bottom: 5em;
@@ -244,6 +272,10 @@ h2 {
 
 .buff3 {
     padding-bottom: 0.8em;
+}
+
+.buff4 {
+    height: 100px;
 }
 
 .table-semgroup {
@@ -297,7 +329,8 @@ select::-ms-expand {
 }
 
 .desc {
-    font-size: 0.9em;
+    font-size: 0.8em;
+    margin-bottom: 0.8em;
 }
 
 /*.checkboxitem input {
@@ -341,6 +374,26 @@ select::-ms-expand {
     width: 16px;
 }
 
+.footer-align {
+   text-align: center
+}
+
+.dropdown {
+    height: 3em;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    padding: 0.5em 1em;
+    font-size: 0.8em;
+}
+
+.dropdown:focus {
+    box-shadow: none;
+    outline: none;
+    border: 2px solid #ff0000;
+    box-shadow: 1px 2px 5px 0.5px rgba(190,20,40, 0.4);
+    animation: ease;
+}
+
 
 @media screen and (max-width: 480px) {
     h1 {
@@ -363,7 +416,7 @@ select::-ms-expand {
         display: inline-block;
         width: 35%;
         /*margin-right: 3%;*/
-    }
+}
 
     .buttom-btn {
         width: 47%;
@@ -385,6 +438,28 @@ select::-ms-expand {
     .transparent-shadow-red {
         box-shadow: 4px 2px 8px 1px rgba(190,20,40, 0.6);
         -moz-box-shadow: 4px 2px 8px 1px rgba(190,20,40, 0.6);
+    }
+
+    .jumbotron-arrow {
+        width: 5%;
+        margin-left: 89%;
+        padding: 6% 0;
+        display: inline-block;
+    }
+    .home-rows {
+        margin-bottom: 1.5em;
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .home-actionlink {
+        padding: 16px;
+    }
+
+    .middle {
+        margin-left: 0;
+        margin-right: 0;
     }
 }
 

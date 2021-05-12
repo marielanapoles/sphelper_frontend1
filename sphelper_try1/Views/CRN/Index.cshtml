@@ -27,18 +27,21 @@
             <tbody>
                 @Html.DisplayFor(model => model.CrnTableItems)
             </tbody>
-            <tfoot><tr><td colspan="4">End</td></tr></tfoot>
+            <tfoot><tr><td colspan="4" class="footer-align">End</td></tr></tfoot>
         </table>
         <br>
+
+        <div class="crn-button">
+            <div class="buttom-btn transparent-shadow-white">
+                @Html.ActionLink("Back", "SelectSubjectForCRN", "CRN")
+            </div>
+            <div class="buttom-btn transparent-shadow-red">
+                <a href="https://my.tafesa.edu.au/">myTAFE SA</a>
+            </div>
+        </div>
     </content>
-    <div class="crn-button">
-        <div class="buttom-btn transparent-shadow-white">
-            @Html.ActionLink("Back", "SelectSubjectForCRN", "CRN")
-        </div>
-        <div class="buttom-btn transparent-shadow-red">
-            <a href="https://my.tafesa.edu.au/">myTAFE SA</a>
-        </div>
-    </div>
+
+    <div class="buff4"></div>
 </div>
 
 

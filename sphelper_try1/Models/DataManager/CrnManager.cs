@@ -22,7 +22,8 @@ namespace sphelper_try1.Models.DataManager
                                 join subjectCompetency in context.subject_competency
                                 on comptency.TafeCompCode equals subjectCompetency.TafeCompCode
                                 where subjectCompetency.SubjectCode == subject &&
-                                      competencyQualification.QualCode == qualcode
+                                      (competencyQualification.QualCode == qualcode || 
+                                       competencyQualification.QualCode.Contains("PRG")) //hardcoded bc idk 
                                 select new 
                                 {
                                     SubjectCode = subjectCompetency.SubjectCode,
@@ -74,10 +75,16 @@ namespace sphelper_try1.Models.DataManager
                                     CompetencyName = competency.CompetencyName
                                 };
 
-                    
-                    if(query.FirstOrDefault() != null)
+                    var result = query.FirstOrDefault();
+
+
+                    if ( result != null)
                     {
-                        crnDetailsList.Add(query.FirstOrDefault());
+                        crnDetailsList.Add(result);
+                    } else
+                    {
+                        result.CRN = "N/A";
+                        crnDetailsList.Add(result);
                     }
 
                     //crnDetailsList.Add(query.First());

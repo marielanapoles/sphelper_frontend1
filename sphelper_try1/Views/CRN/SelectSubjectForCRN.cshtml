@@ -6,42 +6,43 @@
 
 @using (Html.BeginForm("Index", "CRN"))
 {
-    <div>
-        <header>
-            <h1>Select Subject</h1>
+<div>
+    <header>
+        <h1>Select Subject</h1>
+        <div>
+            <p class="studyplan-p">@Html.DisplayFor(model => model.Name), select subjects for your studyplan: <br></p>
+            @*<p class="studyplan-pqual">@Html.DisplayFor(model => model.Qualification)</p>*@
+            @*<p class="studyplan-p">National Code: @Html.DisplayFor(model => model.NationalCode) Tafe Code: @Html.DisplayFor(model => model.TafeCode)</p>*@
+        </div>
+    </header>
+    <br>
 
-            <div>
-                <p class="studyplan-p">@Html.DisplayFor(model => model.Name), select subjects for your studyplan: <br></p>
-                @*<p class="studyplan-pqual">@Html.DisplayFor(model => model.Qualification)</p>*@
-                @*<p class="studyplan-p">National Code: @Html.DisplayFor(model => model.NationalCode) Tafe Code: @Html.DisplayFor(model => model.TafeCode)</p>*@
-            </div>
-        </header><br>
+    <content>
+        <table class="table table-bordered">
+            <tr>
+                <th>Subject</th>
+                <th>Subject Description</th>
+                <th>Status</th>
+            </tr>
 
-        <content>
-            <table class="table table-bordered">
-                <tr>
-                    <th>Subject</th>
-                    <th>Subject Description</th>
-                    <th>Status</th>
-                </tr>
+            @*reusable table template*@
+            <tbody>
+                @Html.DisplayFor(model => model.TableItemsSelectSubject)
+            </tbody>
+            <tfoot><tr><td colspan="3" class="footer-align">End</td></tr></tfoot>
+        </table>
 
-                @*reusable table template*@
-                <tbody>
-                    @Html.DisplayFor(model => model.TableItemsSelectSubject)
-                </tbody>
-                <tfoot><tr><td colspan="3">End</td></tr></tfoot>
-            </table>
-            
-            <div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        @Html.HiddenFor(model => model.QualCode)
-                        <input type="submit" value="Get CRN" class="btn button color-shadow" />
-                    </div>
+        <div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    @Html.HiddenFor(model => model.QualCode)
+                    <input type="submit" value="Get CRN" class="btn button color-shadow" />
                 </div>
             </div>
-            <br>
-        </content>
-    </div>
+        </div>
+        <br>
+    </content>
+    <div class="buff4"></div>
+</div>
 }
 

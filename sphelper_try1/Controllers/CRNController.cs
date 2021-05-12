@@ -44,12 +44,10 @@ namespace sphelper_try1.Controllers
 
             //get crn details for 
             var crnDetails = CrnManager.GetCrn_Details(tafeCompSubjCode, 1, 2019);
-            //var crnDetails = CrnManager.GetCrn_Details(tafeCompSubjCode, 1, 2019);
             
             //for viewMoswel
             var viewModel = new CrnDetailsVM { CrnTableItems = crnDetails };
-
-
+            
             //redirect to index
             return View(viewModel);
             //return View(model);
@@ -58,6 +56,7 @@ namespace sphelper_try1.Controllers
         public ActionResult SelectSubjectForCRN(string studentId, string qualificationCode, string studyplanCode, string studentName)
         {
             var qualification = Student_StudyplanManager.FindQualificationByQualCode(qualificationCode);
+
             var query = from subj in db.subjects.ToList()
                         join sp_subj in db.studyplan_subject.ToList()
                         on subj.SubjectCode equals sp_subj.SubjectCode
@@ -70,6 +69,7 @@ namespace sphelper_try1.Controllers
                             SubjectTitle = subj.SubjectDescription,
                             SubjectDescription = subj.SubjectLongDescription,
                         };
+
             var semGroup = query.GroupBy(x => x.Semester).ToList();
             
 
@@ -88,6 +88,7 @@ namespace sphelper_try1.Controllers
                         SubjectDescription = x.SubjectDescription,
                         SubjectTitle = x.SubjectTitle,
                         Semester = x.Semester.ToString(),
+                        Result = Student_StudyplanManager.FindStudentGrade(studentId, 2, 2019, x.SubjectCode),
                         IsChecked = false
                     }).ToList(),
                 });

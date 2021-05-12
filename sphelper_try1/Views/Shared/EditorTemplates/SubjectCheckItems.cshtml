@@ -4,16 +4,30 @@
     <td class="table-semgroup" colspan="3" height="24">Semester @Html.DisplayFor(model => model.Semester)</td>
 </tr>*@
 <tr>
-    <td> @Html.DisplayFor(model => model.SubjectCode)</td>
+    
     <td>
+        @*Subject Code*@
+        @Html.DisplayFor(model => model.SubjectCode)
+    </td>
+    <td>
+        
         <div class="buff3">
+            @*Subject Title*@
             @Html.DisplayFor(model => model.SubjectTitle)
         </div>
         <div class="desc">
+            @*Subject Description*@
             @Html.DisplayFor(model => model.SubjectDescription)
         </div>
     </td>
-    <td class="checkboxitem">@Html.CheckBoxFor(model => model.IsChecked, new { @class = "" })</td>
+    <td class="checkboxitem">
+        @*checkbox item*@
+        @if (Model.Result == "PA")
+        { <p class = "studyplan-status ">@Html.DisplayFor(model => model.Result)</p> }
+        else
+        { @Html.CheckBoxFor(model => model.IsChecked) }
+    </td>
+
     @Html.HiddenFor(model => model.SubjectCode)
     @Html.HiddenFor(model => model.SubjectTitle)
     @Html.HiddenFor(model => model.SubjectDescription)

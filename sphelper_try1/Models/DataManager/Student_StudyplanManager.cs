@@ -53,7 +53,7 @@ namespace sphelper_try1.Models.DataManager
         {
             using (SPHelperEntities context = new SPHelperEntities())
             {
-                var query = from q in context.qualifications
+                var query = from q in context.qualifications.ToList()
                             where q.QualCode == qualCode
                             select new 
                             {
@@ -62,6 +62,7 @@ namespace sphelper_try1.Models.DataManager
                                 q.NationalQualCode,
                                 q.TafeQualCode
                             };
+
                 qualification qualification = new qualification()
                 {
                     QualCode = query.First().QualCode,
@@ -78,30 +79,41 @@ namespace sphelper_try1.Models.DataManager
         {
             using (SPHelperEntities context = new SPHelperEntities())
             {
-                var query = context.studyplan_qualification.Where(x => x.QualCode == qualCode && x.Priority == 1);
+                var query = context.studyplan_qualification.
+                    Where(x => x.QualCode == qualCode && x.Priority == 1);
                 string studyplan = query.First().StudyPlanCode;
 
                 return studyplan;
             }
         }
 
-        //for this part im not 100% sure
-        //public static List<TableItems> GetAllSubjectByStudyplan(string qualification)
-        //{
-        //    using (SPHelperEntities context = new SPHelperEntities())
-        //    {
-        //        var query = from sp_subj in context.studyplan_subject
-        //                    join subj in context.subjects
-        //                    on sp_subj.SubjectCode equals subj.SubjectCode into subjGroup
-        //                    where sp_subj.StudyPlanCode == qualification //qualification string
-        //                    orderby sp_subj.TimingSemester, sp_subj.TimingSemesterTerm
-        //                    select new
-        //                    {
-        //                        Semester = sp_subj.TimingSemester.ToString(),
-        //                        Subjects = subjGroup.ToList()
-        //                    };
-        //        return query.ToList();
-        //    }
-        //}
+        public static string FindStudentGrade(string studentId, int termCode, int termYear, string subjectCode)
+        {
+            using (SPHelperEntities context = new SPHelperEntities())
+            {
+                var query = from student_grade in context.student_grade
+                            join crn_detail in context.crn_detail
+                            on student_grade.CRN equals crn_detail.CRN
+                            where student_grade.StudentID == studentId &&
+                                  student_grade.TermCode <= termCode &&
+                                  student_grade.TermYear <= termYear && 
+                                  crn_detail.SubjectCode == subjectCode
+                            select student_grade.Grade;
+                
+                var status = "";
+                var grade = query.FirstOrDefault();
+
+                if (grade == null)
+                {
+                    status = "N/A";
+                } else {
+                    status = grade;
+                } 
+
+                return status;
+            }
+        }
+
+        
     }
 }
