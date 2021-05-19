@@ -14,17 +14,10 @@ namespace sphelper_try1.ViewModel
 
         //get subjects
         public List<TableItemsSelectSubject> TableItemsSelectSubject { get; set; }
-
-        //public List<SubjectCheckItems> SubjectCheckItems { get; set; }
-
-        //public List<CrnSubject> CrnDetails { get; set; }
-
-
+        
         public CrnVM()
         {
             TableItemsSelectSubject = new List<TableItemsSelectSubject>();
-            //SubjectCheckItems = new List<SubjectCheckItems>();
-            //CrnDetails = new List<CrnSubject>();
         }
     };
 }

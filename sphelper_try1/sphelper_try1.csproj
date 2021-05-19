@@ -51,10 +51,17 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="IronPdf.Assets.Rendering.Windows, Version=22.0.0.0, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPdf.Assets.Rendering.Windows.22.0.0\lib\net40\IronPdf.Assets.Rendering.Windows.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -187,6 +194,7 @@
     <Compile Include="Models\student.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\studentinfo.cs" />
     <Compile Include="Models\student_grade.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
@@ -244,6 +252,7 @@
       <DependentUpon>SPHelperDbModel.edmx</DependentUpon>
       <LastGenOutput>SPHelperDbModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ClassDiagram1.cd" />
@@ -254,6 +263,7 @@
     <Content Include="Models\SPHelperDbModel.edmx.diagram">
       <DependentUpon>SPHelperDbModel.edmx</DependentUpon>
     </Content>
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -265,6 +275,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\myscript.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -285,7 +296,7 @@
     <Content Include="Views\CRN\Index.cshtml" />
     <Content Include="Views\CRN\SelectSubjectForCRN.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\TableItemsSelectSubject.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\TableItemsCrn.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TableItemsCrn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -15,6 +15,8 @@ namespace sphelper_try1.Models
         public string CompetencyName { get; set; }
         public string TafeCompetencyCode { get; set; }
 
+        public bool isDeleted { get; set; }
+
         public TableItemsCrn()
         {
             //CrnSubiects = new List<CrnSubject>();

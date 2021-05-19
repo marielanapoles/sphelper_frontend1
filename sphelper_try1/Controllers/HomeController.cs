@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Runtime.Caching;
 
 namespace sphelper_try1.Controllers
 {
@@ -18,40 +19,35 @@ namespace sphelper_try1.Controllers
         {
             studentId = s_id;
             //get student name
-            var student = Student_StudyplanManager.FindStudentById(studentId);
+            var studentName = Student_StudyplanManager.FindstudentName(studentId);
 
             //get qualification, tafecode & national code
             var qualification = Student_StudyplanManager.FindQualificationByStudentId(studentId);
 
             //get study plan for each student
-            string studyplan = Student_StudyplanManager.FindStudyplanByQualificaitonCode(qualification.QualCode);
+            string studyPlanCode = Student_StudyplanManager.FindStudyplanByQualificaitonCode(qualification.QualCode);
 
-            var viewModel = new HomeVM();
-            viewModel.Id = studentId;
-            viewModel.Name = student.GivenName;
-            viewModel.Qualification = qualification.QualCode;
-            viewModel.StudyplanCode = studyplan;
+            var student = new studentinfo();
+            student.StudentId = studentId;
+            student.Name = studentName;
+            student.QualCode = qualification.QualCode;
+            student.StudyPlanCode = studyPlanCode;
+
+            var viewModel = new HomeVM()
+            {
+                StudentInfo = student
+            };
+
+            //memory cache
+            var date = DateTime.Now;
+            var expirydate = date.AddDays(1);
+            MemoryCache.Default.Add("studentinfo", student, expirydate);
 
             return View(viewModel);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
         public ActionResult SeekAdvice()
         {
-           
             return View();
         }
     }

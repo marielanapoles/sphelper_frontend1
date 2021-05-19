@@ -1,47 +1,52 @@
-﻿@*@model sphelper_try1.Models.TableItemsCrn*@
-@model sphelper_try1.ViewModel.CrnDetailsVM
+﻿@model sphelper_try1.ViewModel.CrnDetailsVM
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    <header>
-        <h1>CRN</h1>
-
-        <div>
-            <p class="studyplan-p">We prepared the following CRN for the subject/s you selected</p>
-        </div>
-    </header><br>
-
-    <content>
-        <table class="table table-bordered">
-            <tr>
-                <th>CRN</th>
-                <th>Subject Code</th>
-                <th colspan="2">Description</th>
-            </tr>
-
-            @*reusable table template*@
-            <tbody>
-                @Html.DisplayFor(model => model.CrnTableItems)
-            </tbody>
-            <tfoot><tr><td colspan="4" class="footer-align">End</td></tr></tfoot>
-        </table>
-        <br>
-
-        <div class="crn-button">
-            <div class="buttom-btn transparent-shadow-white">
-                @Html.ActionLink("Back", "SelectSubjectForCRN", "CRN")
+@using (Html.BeginForm("GeneratePDF", "CRN"))
+{
+    <div>
+        <header>
+            <h1> CRN </h1>
+            <div>
+                <p class="studyplan-p">We prepared the following CRN for the subject/s you selected</p>
             </div>
-            <div class="buttom-btn transparent-shadow-red">
-                <a href="https://my.tafesa.edu.au/">myTAFE SA</a>
+        </header><br>
+
+        <content>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>CRN</th>
+                    <th>Subject Code</th>
+                    <th colspan="2">Description</th>
+                </tr>
+
+                @*reusable table template*@
+                <tbody>
+                    @Html.EditorFor(model => model.CrnTableItems)
+                </tbody>
+                <tfoot><tr><td colspan="4" class="footer-align">End</td></tr></tfoot>
+            </table>
+            <br>
+
+            <div class="crn-button">
+                <div>
+                    <input type="submit" value="Get PDF"/>
+                    @*@Html.ActionLink("Get PDF", "GeneratePDF", Model.CrnTableItems)*@
+                </div>
+                <div class="buttom-btn transparent-shadow-white">
+                    @Html.ActionLink("Back", "SelectSubjectForCRN", "CRN") @*this is like an a tag*@
+                </div>
+                <div class="buttom-btn transparent-shadow-red">
+                    <a href="https://my.tafesa.edu.au/">myTAFE SA</a>
+                </div>
             </div>
-        </div>
-    </content>
+        </content>
 
-    <div class="buff4"></div>
-</div>
-
+        <div class="buff4"></div>
+    </div>
+}
 

@@ -51,7 +51,6 @@ namespace sphelper_try1.Models.DataManager
             };
         }
 
-        //public static List<CrnSubject> GetCrn_Details(List<subject_competency> tafeCompSubjCode, int termCodeStart, int termYearStart)
         public static List<TableItemsCrn> GetCrn_Details(List<subject_competency> tafeCompSubjCode, int termCodeStart, int termYearStart)
         {
             var crnDetailsList = new List<TableItemsCrn>();
@@ -72,7 +71,8 @@ namespace sphelper_try1.Models.DataManager
                                     CRN = crndetails.CRN,
                                     SubjectCode = crndetails.SubjectCode,
                                     TafeCompetencyCode = competency.TafeCompCode,
-                                    CompetencyName = competency.CompetencyName
+                                    CompetencyName = competency.CompetencyName,
+                                    isDeleted = false
                                 };
 
                     var result = query.FirstOrDefault();
@@ -81,31 +81,21 @@ namespace sphelper_try1.Models.DataManager
                     if ( result != null)
                     {
                         crnDetailsList.Add(result);
-                    } else
-                    {
-                        result.CRN = "N/A";
-                        crnDetailsList.Add(result);
                     }
-
-                    //crnDetailsList.Add(query.First());
-
+                    else
+                    {
+                        var nullResult = new TableItemsCrn()
+                        {
+                            CRN = "N/A",
+                            SubjectCode = item.SubjectCode,
+                            TafeCompetencyCode = item.TafeCompCode,
+                            CompetencyName = item.competency.CompetencyName
+                        };
+                        crnDetailsList.Add(nullResult);
+                    }
                 }
                 return crnDetailsList;
             }
         }
     }
 }
-
-//var query = from crn in context.crn_detail
-//            join subj in context.subjects
-//            on crn.SubjectCode equals subj.SubjectCode
-//            where crn.SubjectCode == subject
-//                  && crn.TermCodeStart == termCodeStart 
-//                  && crn.TermYearStart == termYearStart
-
-//            select new CrnSubject()
-//            {
-//                CRN =  crn.CRN,
-//                SubjectCode = subj.SubjectCode,
-//                SubjectDescription = subj.SubjectDescription
-//            };

@@ -5,19 +5,15 @@ namespace sphelper_try1.Models.DataManager
 {
     public class Student_StudyplanManager
     {
-        public static student FindStudentById(string studentId)
+        public static string FindstudentName(string studentId)
         {
             using (SPHelperEntities context = new SPHelperEntities())
             {
-                var query = context.students.Where(x => x.StudentID == studentId);
-                student student1 = new student()
-                {
-                    StudentID = query.First().StudentID,
-                    GivenName = query.First().GivenName,
-                    LastName = query.First().LastName,
-                    EmailAddress = query.First().EmailAddress
-                };
-                return student1;
+                var query = from s in context.students
+                            where s.StudentID == studentId
+                            select s.GivenName;
+
+                return query.FirstOrDefault().ToString();
             }
         }
 
@@ -26,26 +22,27 @@ namespace sphelper_try1.Models.DataManager
             using (SPHelperEntities context = new SPHelperEntities())
             {
                 var query = from student_studyplan in context.student_studyplan
-                            join qualification in context.qualifications
-                            on student_studyplan.QualCode equals qualification.QualCode
+                            join qual in context.qualifications
+                            on student_studyplan.QualCode equals qual.QualCode
                             where student_studyplan.StudentID == studentId
                             select new
                             {
-                                qualification.QualCode,
-                                //qualification.QualName,
-                                //qualification.NationalQualCode,
-                                //qualification.TafeQualCode
+                                student_studyplan.QualCode,
+                                qual.QualName,
+                                qual.NationalQualCode,
+                                qual.TafeQualCode
 
                             };
-                qualification student_qualification = new qualification()
+
+                var qualification = new qualification()
                 {
                     QualCode = query.First().QualCode,
-                    //QualName = query.First().QualName,
-                    //NationalQualCode = query.First().NationalQualCode,
-                    //TafeQualCode = query.First().TafeQualCode
+                    QualName = query.First().QualName,
+                    NationalQualCode = query.First().NationalQualCode,
+                    TafeQualCode = query.First().TafeQualCode
                 };
 
-                return student_qualification;
+                return qualification;
             }
         }
 

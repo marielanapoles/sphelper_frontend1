@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Runtime.Caching;
 
 namespace sphelper_try1.Controllers
 {
@@ -14,17 +15,19 @@ namespace sphelper_try1.Controllers
         SPHelperEntities db = new SPHelperEntities();
 
         // GET: Studyplan_Subject
-        public ActionResult Index(string studentId, string qualificationCode, string studyplanCode, string studentName)
+        //public ActionResult Index(string studentId, string qualificationCode, string studyplanCode, string studentName)
+        public ActionResult Index()
         {
+            var student = MemoryCache.Default["studentinfo"] as studentinfo;
             //get qualification, tafecode & national code
-            var qualification = Student_StudyplanManager.FindQualificationByQualCode(qualificationCode);
+            var qualification = Student_StudyplanManager.FindQualificationByStudentId(student.StudentId);
 
-            //get subjects & semester group by studyplan
+            //get subjects based on studyplan code
             var query = from subj in db.subjects.ToList()
                         join sp_subj in db.studyplan_subject.ToList()
                         on subj.SubjectCode equals sp_subj.SubjectCode
                         orderby sp_subj.TimingSemesterTerm
-                        where sp_subj.StudyPlanCode == studyplanCode
+                        where sp_subj.StudyPlanCode == student.StudyPlanCode
                         select new
                         {
                             Semester = sp_subj.TimingSemester,
@@ -33,9 +36,10 @@ namespace sphelper_try1.Controllers
                             SubjectDescription = subj.SubjectLongDescription
                        };
 
+            //group the subjects by semester
             var semGroup = query.GroupBy(x => x.Semester).ToList();
             
-            //tableitems 
+            //create an instance of table items for my displa template
             var tableItems = new List<TableItems>();
 
             //ViewModel instance 
@@ -52,15 +56,16 @@ namespace sphelper_try1.Controllers
                         SubjectCode = x.SubjectCode,
                         SubjectTitle = x.SubjectTitle,
                         SubjectDescription = x.SubjectDescription,
-                        Status = Student_StudyplanManager.FindStudentGrade(studentId, 2, 2019, x.SubjectCode)
+                        Status = Student_StudyplanManager.FindStudentGrade(student.StudentId, 2, 2019, x.SubjectCode)
                     }).ToList(),
                 });
 
+                //get number of semester for each student and that I will need to add to a dropdown list later
                 viewModel.Timing.Add("Semester: " + subject.First().Semester.ToString());
             };
 
-            //Pass all the data I need from the objects to the viewmodel
-            viewModel.StudentName = studentName;
+            //Pass all the data I need to the viewmodel
+            viewModel.StudentName = student.Name;
             viewModel.Qualification = qualification.QualName;
             viewModel.NationalCode = qualification.NationalQualCode;
             viewModel.TafeCode = qualification.TafeQualCode;

@@ -6,20 +6,15 @@
 
 <div class="home-header">
     <h3>Hello,</h3>
-    <h1>@Html.DisplayTextFor(m => m.Name)</h1>
+    <h1>@Html.DisplayTextFor(m => m.StudentInfo.Name)</h1>
 </div>
 
 <div class="color-shadow home-jumbotron">
     @Html.ActionLink("View Study Plan",                                 //link text
                          "Index",                                       //action name
                          "Studyplan_Subject",                           //controller name
-                         new { studentId = Model.Id,                    //routevalues
-                             qualificationCode = Model.Qualification,
-                             studyplanCode = Model.StudyplanCode,
-                             studentName = Model.Name
-                         },
+                         null,
                          new { @class = "home-actionlink-big" })        @*html attributes*@
-                        @*<div class="buff2"></div>*@
                         <a href="/Studyplan_Subject/Index"> <img src="~/Content/img/arrow.png" class="jumbotron-arrow" /></a>
                     </div>
 
@@ -28,18 +23,22 @@
         @Html.ActionLink("Select Subject",                            //link text
                          "SelectSubjectForCRN",                       //action name
                          "CRN",                                       //controller name
-                         new { studentId = Model.Id ,
-                             qualificationCode = Model.Qualification,
-                             studyplanCode = Model.StudyplanCode,
-                             studentName = Model.Name
-                         },
+                         null,
                          new { @class = "home-actionlink" })          @*html attributes*@
     </div>
     <div class="home-rows transparent-shadow middle">
-        @Html.ActionLink("My CRNs", "Crn", "Home", null, new { @class = "home-actionlink " })
+        @Html.ActionLink("My CRNs", 
+                         "Crn", 
+                         "Home", 
+                         null, 
+                         new { @class = "home-actionlink " })
     </div>
     <div class="home-rows transparent-shadow">
-        @Html.ActionLink("Seek Advice", "SeekAdvice", "Home", null, new { @class = "home-actionlink" })
+        @Html.ActionLink("Seek Advice", 
+                         "SeekAdvice", 
+                         "Home", 
+                         null, 
+                         new { @class = "home-actionlink" })
     </div>
 </div>
 
