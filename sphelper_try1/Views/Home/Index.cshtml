@@ -5,40 +5,46 @@
 }
 
 <div class="home-header">
-    <h3>Hello,</h3>
-    <h1>@Html.DisplayTextFor(m => m.StudentInfo.Name)</h1>
+    <h1><span>Hello, </span> @Html.DisplayTextFor(m => m.StudentInfo.Name)</h1>
 </div>
 
-<div class="color-shadow home-jumbotron">
-    @Html.ActionLink("View Study Plan",                                 //link text
-                         "Index",                                       //action name
-                         "Studyplan_Subject",                           //controller name
-                         null,
-                         new { @class = "home-actionlink-big" })        @*html attributes*@
-                        <a href="/Studyplan_Subject/Index"> <img src="~/Content/img/arrow.png" class="jumbotron-arrow" /></a>
-                    </div>
-
 <div class="align">
-    <div class="home-rows transparent-shadow">
-        @Html.ActionLink("Select Subject",                            //link text
-                         "SelectSubjectForCRN",                       //action name
-                         "CRN",                                       //controller name
-                         null,
-                         new { @class = "home-actionlink" })          @*html attributes*@
+    <div class="upper-box">
+        <div class="color-shadow home-jumbotron home-rows">
+            @Html.ActionLink("View Study Plan",                                  //link text
+                                 "Index",                                       //action name
+                                 "Studyplan_Subject",                           //controller name
+                                 null,
+                                 new { @class = "home-actionlink-big" })        @*html attributes*@
+            <a href="/Studyplan_Subject/Index">
+                <img src="~/Content/img/arrow.png" class="jumbotron-arrow" />
+            </a>
+        </div>
+
+        <div class="home-rows transparent-shadow">
+            @Html.ActionLink("Select Subject",                            //link text
+                             "SelectSubjectForCRN",                       //action name
+                             "CRN",                                       //controller name
+                             null,
+                             new { @class = "home-actionlink" })          @*html attributes*@
+        </div>
     </div>
-    <div class="home-rows transparent-shadow middle">
-        @Html.ActionLink("My CRNs", 
-                         "Crn", 
-                         "Home", 
-                         null, 
-                         new { @class = "home-actionlink " })
-    </div>
-    <div class="home-rows transparent-shadow">
-        @Html.ActionLink("Seek Advice", 
-                         "SeekAdvice", 
-                         "Home", 
-                         null, 
-                         new { @class = "home-actionlink" })
+
+    <div class="lower-box">
+        <div class="home-rows transparent-shadow">
+            @Html.ActionLink("My CRNs",
+                             "Index",
+                             "CRN",
+                             null,
+                             new { @class = "home-actionlink " })
+        </div>
+        <div class="home-rows transparent-shadow">
+            @Html.ActionLink("Seek Advice",
+                             "SeekAdvice",
+                             "Home",
+                             null,
+                             new { @class = "home-actionlink" })
+        </div>
     </div>
 </div>
 

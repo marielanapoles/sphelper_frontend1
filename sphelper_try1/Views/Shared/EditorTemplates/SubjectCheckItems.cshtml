@@ -4,32 +4,69 @@
     <td class="table-semgroup" colspan="3" height="24">Semester @Html.DisplayFor(model => model.Semester)</td>
 </tr>*@
 <tr>
-    
+
     <td>
         @*Subject Code*@
-        @Html.DisplayFor(model => model.SubjectCode)
+        <p>
+            @Html.DisplayFor(model => model.SubjectCode)
+        </p>
     </td>
     <td>
-        
-        <div class="buff3">
+        <div>
             @*Subject Title*@
-            @Html.DisplayFor(model => model.SubjectTitle)
+            <p>@Html.DisplayFor(model => model.SubjectTitle)</p>
         </div>
         <div class="desc">
             @*Subject Description*@
-            @Html.DisplayFor(model => model.SubjectDescription)
+            <p>@Html.DisplayFor(model => model.SubjectDescription)</p>
+
+            <span>Prerequisite:</span>
+            @foreach (var item in Model.Prerequisite_SubjectCode)
+            {
+                if (item != "N/A")
+                {
+                    if (Model.IsPrerequisiteSatisfied == true)
+                    {
+                        <span>@Html.DisplayFor(model => item)</span>
+                    }
+                    else
+                    {
+                        <span class="prereq-subj">@Html.DisplayFor(model => item)</span>
+                    }
+
+                }
+                else
+                {
+                    <span>@Html.DisplayFor(model => item)</span>
+                }
+            }
         </div>
     </td>
     <td class="checkboxitem">
-        @*checkbox item*@
-        @if (Model.Result == "PA")
-        { <p class = "studyplan-status ">@Html.DisplayFor(model => model.Result)</p> }
-        else
-        { @Html.CheckBoxFor(model => model.IsChecked) }
+        <div>
+            @*checkbox item*@
+            @if (Model.Result != "N/A")
+            {
+                <p class="studyplan-status">@Html.DisplayFor(model=>model.Result)</p>
+            }
+            else if (Model.IsPrerequisiteSatisfied != false)
+            {
+                @Html.CheckBoxFor(model => model.IsChecked)
+            }
+            else
+            {
+                @Html.CheckBoxFor(model => model.IsChecked, new { @disabled = "disabled", @class = "isDisabled" })
+            }
+        </div>
+        
     </td>
 
     @Html.HiddenFor(model => model.SubjectCode)
     @Html.HiddenFor(model => model.SubjectTitle)
     @Html.HiddenFor(model => model.SubjectDescription)
     @Html.HiddenFor(model => model.Semester)
+    @Html.HiddenFor(model => model.IsChecked)
+    @Html.HiddenFor(model => model.Result)
+    @Html.HiddenFor(model => model.IsPrerequisiteSatisfied)
+    @Html.HiddenFor(model => model.Prerequisite_SubjectCode)
 </tr>

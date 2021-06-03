@@ -5,41 +5,108 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <div>
+    <!--clase css con bootstrap localizado en folder Content-->
     <header class="seekadvice-header">
         <h2>Seek Advice</h2>
-        <p>Please fill out this form to submit your inquiries. We will respond to you as soon as we can.</p>
+        <p>
+            Helpful for students who need advice regarding their
+            enrollment and want to contact a lecturer
+            faster and easier.
+        </p>
     </header>
+    <!--Este html helper Beginform es el action del form y llama el Action method en controller "SendMail","Home Controller:, obtiene el metodo) -->
+    @using (Html.BeginForm("SendMail", "Home", FormMethod.Get))
+    {
 
-    <content>
-        <div class="form-group">
-            <div class="">
-                <p> Select a lecturer to help you: </p>
-                @Html.DropDownListFor(m => m.Lecturers, new SelectList(Model.Lecturers, "IT Studies"), new { @class = "form-control seekadvice-shadow" })
+        <content>
+
+            <div class="form-group">
+                <div>
+                    <p>1. Select the issue:</p>
+                    @*Html.EditorFor(m => m.Title, "", new { htmlAttributes = new { @class = "form-control seekadvice-shadow" } })*@
+                    @*  @Html.DropDownListFor(s => s.Issues, new SelectList(Model.Issues, "IT Studies"), new { @class = "form-control seekadvice-shadow" })*@
+
+                    <!--TEST:CONECTA  List<SelectListItem> items en el action SeekAdvice() con  html helper dropdown aqui  pasandolo asi:  ViewBag.MovieType = items; ) -->
+                    @* @Html.DropDownList("MovieType") *@
+                    @*  @Html.DropDownList("issueListFromController") *@
+                    @Html.DropDownList("issueListFromController", (IEnumerable<SelectListItem>)ViewBag.issueListFromController, new { @class = "form-control seekadvice-shadow" })
+
+
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div>
-                <p>Your concern</p>
-                @Html.EditorFor(m => m.Title, "", new { htmlAttributes = new { @class = "form-control seekadvice-shadow" } })
+            <div class="form-group">
+                <div name="issueDetails2">
+                    <p>2. Please provide more details about your concern</p>
+                    @* @Html.TextAreaFor(s => s.Body, new { @class = "form-control seekadvice-shadow", @cols = 20, @rows = 17 })*@
+                    @Html.TextArea("TextAreaFromHtml", new { @class = "form-control seekadvice-shadow seekadvice-textarea", @cols = 20, @rows = 17 })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div>
-                <p>Please provide more details about your concern</p>
-                @Html.TextAreaFor(m => m.Body, new { @class = "form-control seekadvice-shadow", @cols = 20, @rows = 17 })
+
+            <div class="form-group">
+                <div class="">
+                    <p>3. Select a Lecturer to help you: </p>
+                    <!--crea un menu desplegable, este es un funcion anonima donde crea un objeto llamado m que por default es de clase SeekAdvice ya que asi es determinado
+                    en la linea 2. de esta forma accede al atributo Lecturers que tiene la lista almacenada desde controller.  Nota: esto crea el menu desplegable pero no se donde se muestra el texto "IT Studies"
+                       ** new SelectList(Model.Lecturers, "IT Studies")  -->
+                    @* @  @Html.DropDownListFor(s => s.Lecturers, new SelectList(Model.Lecturers, "IT Studies"), new { @class = "form-control seekadvice-shadow" }) *@
+                    @*  @Html.DropDownList("lecturerListFromController") *@
+                    @Html.DropDownList("lecturerListFromController", (IEnumerable<SelectListItem>)ViewBag.lecturerListFromController, new { @class = "form-control seekadvice-shadow" })
+
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div>
-                <input type="submit" value="Submit" class="btn button color-shadow" />
+
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Seek Advice" class="btn button color-shadow" />
+                </div>
             </div>
-        </div>
+        </content>
 
-    </content>
-    <div class="buff4"></div>
+    }
 </div>
+
+
+@*<div>
+        <header class="seekadvice-header">
+            <h2>Seek Advice</h2>
+            <p>Please fill out this form to submit your inquiries. We will respond to you as soon as we can.</p>
+        </header>
+
+        <content>
+            <div class="form-group">
+                <div class="">
+                    <p> Select a lecturer to help you: </p>
+                    @Html.DropDownListFor(m => m.Lecturers, new SelectList(Model.Lecturers, "IT Studies"), new { @class = "form-control seekadvice-shadow" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <p>Your concern</p>
+                    @Html.EditorFor(m => m.Title, "", new { htmlAttributes = new { @class = "form-control seekadvice-shadow" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <p>Please provide more details about your concern</p>
+                    @Html.TextAreaFor(m => m.Body, new { @class = "form-control seekadvice-shadow", @cols = 20, @rows = 17 })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Submit" class="btn button color-shadow" />
+                </div>
+            </div>
+
+        </content>
+        <div class="buff4"></div>
+    </div>*@
+
 

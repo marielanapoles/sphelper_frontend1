@@ -9,7 +9,6 @@ namespace sphelper_try1.Models
     {
         public string Semester { get; set; }
 
-        //added
         public string SubjectCode { get; set; }
 
         public string SubjectTitle { get; set; }
@@ -18,6 +17,15 @@ namespace sphelper_try1.Models
 
         public string Result { get; set; }
 
+        public List<string> Prerequisite_SubjectCode { get; set; } 
+
+        public bool IsPrerequisiteSatisfied { get; set; }
+
         public bool IsChecked { get; set; }
+
+        public SubjectCheckItems()
+        {
+            Prerequisite_SubjectCode = new List<string>();
+        }
     }
 }

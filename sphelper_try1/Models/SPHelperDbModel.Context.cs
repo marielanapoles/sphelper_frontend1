@@ -26,6 +26,7 @@ namespace sphelper_try1.Models
         }
     
         public virtual DbSet<campu> campus { get; set; }
+        public virtual DbSet<combination_operator> combination_operator { get; set; }
         public virtual DbSet<competency> competencies { get; set; }
         public virtual DbSet<competency_qualification> competency_qualification { get; set; }
         public virtual DbSet<competency_type> competency_type { get; set; }
@@ -34,6 +35,8 @@ namespace sphelper_try1.Models
         public virtual DbSet<day_of_week> day_of_week { get; set; }
         public virtual DbSet<department> departments { get; set; }
         public virtual DbSet<lecturer> lecturers { get; set; }
+        public virtual DbSet<prerequisite> prerequisites { get; set; }
+        public virtual DbSet<prerequisite_combination> prerequisite_combination { get; set; }
         public virtual DbSet<qualification> qualifications { get; set; }
         public virtual DbSet<student> students { get; set; }
         public virtual DbSet<student_grade> student_grade { get; set; }

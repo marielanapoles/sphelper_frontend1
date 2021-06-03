@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Caching;
 using System.Web;
 
 namespace sphelper_try1.Models.DataManager
@@ -16,15 +17,16 @@ namespace sphelper_try1.Models.DataManager
             {
                 foreach(var subject in subjectCodes)
                 {
-                    var query = from competencyQualification in context.competency_qualification
-                                join comptency in context.competencies
+                    var query = from competencyQualification in context.competency_qualification.ToList()
+                                join comptency in context.competencies.ToList()
                                 on competencyQualification.NationalCompCode equals comptency.NationalCompCode
-                                join subjectCompetency in context.subject_competency
+                                join subjectCompetency in context.subject_competency.ToList()
                                 on comptency.TafeCompCode equals subjectCompetency.TafeCompCode
                                 where subjectCompetency.SubjectCode == subject &&
-                                      (competencyQualification.QualCode == qualcode || 
-                                       competencyQualification.QualCode.Contains("PRG")) //hardcoded bc idk 
-                                select new 
+                                      competencyQualification.QualCode == qualcode
+                                //(competencyQualification.QualCode == qualcode || 
+                                // competencyQualification.QualCode.Contains("PRG")) //hardcoded bc idk 
+                                select new subject_competency()
                                 {
                                     SubjectCode = subjectCompetency.SubjectCode,
                                     TafeCompCode = subjectCompetency.TafeCompCode,
@@ -33,19 +35,7 @@ namespace sphelper_try1.Models.DataManager
                                 };
 
                     query.ToList();
-
-                    foreach (var result in query)
-                    {
-                        var item = new subject_competency()
-                        {
-                            SubjectCode = result.SubjectCode,
-                            TafeCompCode = result.TafeCompCode,
-
-                            competency = result.competency,
-                            subject = result.subject
-                        };
-                        tafeCompetencySubjectCode.Add(item);
-                    }
+                    tafeCompetencySubjectCode.AddRange(query);
                 }
                 return tafeCompetencySubjectCode;
             };
@@ -64,9 +54,9 @@ namespace sphelper_try1.Models.DataManager
                                 on crndetails.TafeCompCode equals competency.TafeCompCode
                                 where crndetails.TafeCompCode == item.TafeCompCode &&
                                       crndetails.SubjectCode == item.SubjectCode &&
-                                      crndetails.TermCodeStart == termCodeStart &&
+                                      (crndetails.TermCodeStart >= termCodeStart && crndetails.TermCodeStart <= termCodeStart+1) &&
                                       crndetails.TermYearStart == termYearStart
-                                select new TableItemsCrn
+                                select new TableItemsCrn()
                                 {
                                     CRN = crndetails.CRN,
                                     SubjectCode = crndetails.SubjectCode,
@@ -97,5 +87,7 @@ namespace sphelper_try1.Models.DataManager
                 return crnDetailsList;
             }
         }
+
+        
     }
 }

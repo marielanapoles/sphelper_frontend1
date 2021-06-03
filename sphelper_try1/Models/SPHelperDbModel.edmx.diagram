@@ -4,28 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="585c6788a63f4cbfbfe32ecc81adfc7c" Name="Diagram1">
-        <EntityTypeShape EntityType="SPHelperModel.campu" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.competency" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.competency_qualification" Width="1.5" PointX="10" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.competency_type" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.crn_detail" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.crn_session_timetable" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.day_of_week" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.department" Width="1.5" PointX="8.75" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.lecturer" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.qualification" Width="1.5" PointX="3.75" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.student" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.student_grade" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.student_studyplan" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.studyplan_qualification" Width="1.5" PointX="6" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.studyplan_subject" Width="1.5" PointX="10.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.subject" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.subject_competency" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.subject_qualification" Width="1.5" PointX="6" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SPHelperModel.term_datetime" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+      <Diagram DiagramId="fdc3b0c68dc64759b3b16c8dbbd023d3" Name="Diagram1">
+        <EntityTypeShape EntityType="SPHelperModel.campu" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.combination_operator" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.competency" Width="1.5" PointX="3.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.competency_qualification" Width="1.5" PointX="11" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.competency_type" Width="1.5" PointX="8.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.crn_detail" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.crn_session_timetable" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.day_of_week" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.department" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.lecturer" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.prerequisite" Width="1.5" PointX="6" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.prerequisite_combination" Width="1.5" PointX="5.25" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.qualification" Width="1.5" PointX="3.75" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.student" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.student_grade" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.student_studyplan" Width="1.5" PointX="8.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.studyplan_qualification" Width="1.5" PointX="6" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.studyplan_subject" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.subject" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.subject_competency" Width="1.5" PointX="6" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.subject_qualification" Width="1.5" PointX="6" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPHelperModel.term_datetime" Width="1.5" PointX="0.75" PointY="16.5" IsExpanded="true" />
         <AssociationConnector Association="SPHelperModel.crn_detail_FK_CRNDetail_CampusCode" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.crn_session_timetable_FK_Session_CampusCode" ManuallyRouted="false" />
+        <AssociationConnector Association="SPHelperModel.FK_Prerequisite_combination" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.crn_detail_FK_CRNDetail_TafeCompCode" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.subject_competency_FK_SubjComp_TafeCompCode" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.competency_qualification_fk_competency_qualification_competency_type1" ManuallyRouted="false" />
@@ -33,9 +37,13 @@
         <AssociationConnector Association="SPHelperModel.crn_detail_FK_CRNDetail_SubjectCode" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.crn_detail_FK_CRNDetail_TermStart" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.crn_session_timetable_FK_Session_CRN" ManuallyRouted="false" />
+        <AssociationConnector Association="SPHelperModel.FK_crn_department" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.student_grade_FK_StudentGrade_CRN" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.crn_session_timetable_FK_Session_DayCode" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.crn_session_timetable_FK_Session_TermStart" ManuallyRouted="false" />
+        <AssociationConnector Association="SPHelperModel.FK_prereq_prereq_comb" ManuallyRouted="false" />
+        <AssociationConnector Association="SPHelperModel.FK_prereq_subject" ManuallyRouted="false" />
+        <AssociationConnector Association="SPHelperModel.FK_prerequisite_studyplan_subject" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.student_studyplan_FK_StudentStudyplan_QualCode" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.studyplan_qualification_FK_StudyPlanQual_QualCode" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.subject_qualification_FK_SubjQual_QualCode" ManuallyRouted="false" />
@@ -43,6 +51,7 @@
         <AssociationConnector Association="SPHelperModel.student_studyplan_FK_StudentStudyplan_StudentID" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.student_grade_FK_StudentGrade_TermStart" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.student_studyplan_FK_StudentStudyplan_TermStart" ManuallyRouted="false" />
+        <AssociationConnector Association="SPHelperModel.FK_StudyPlanSubject_SubjectCode" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.subject_competency_FK_SubjComp_SubjectCode" ManuallyRouted="false" />
         <AssociationConnector Association="SPHelperModel.subject_qualification_FK_SubjQual_SubjectCode" ManuallyRouted="false" />
       </Diagram>

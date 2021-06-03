@@ -12,21 +12,22 @@ namespace sphelper_try1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class studyplan_subject
+    public partial class prerequisite_combination
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public studyplan_subject()
+        public prerequisite_combination()
         {
-            this.prerequisite_combination = new HashSet<prerequisite_combination>();
+            this.prerequisites = new HashSet<prerequisite>();
         }
     
+        public int Id { get; set; }
         public string StudyPlanCode { get; set; }
         public string SubjectCode { get; set; }
-        public int TimingSemester { get; set; }
-        public int TimingSemesterTerm { get; set; }
+        public string Combination_Id { get; set; }
     
+        public virtual combination_operator combination_operator { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<prerequisite_combination> prerequisite_combination { get; set; }
-        public virtual subject subject { get; set; }
+        public virtual ICollection<prerequisite> prerequisites { get; set; }
+        public virtual studyplan_subject studyplan_subject { get; set; }
     }
 }

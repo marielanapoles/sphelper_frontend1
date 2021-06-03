@@ -12,13 +12,13 @@ namespace sphelper_try1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class subject_competency
+    public partial class prerequisite
     {
+        public int Id { get; set; }
         public string SubjectCode { get; set; }
-        public string TafeCompCode { get; set; }
-        public string extra { get; set; }
+        public string Extra { get; set; }
     
-        public virtual competency competency { get; set; }
+        public virtual prerequisite_combination prerequisite_combination { get; set; }
         public virtual subject subject { get; set; }
     }
 }

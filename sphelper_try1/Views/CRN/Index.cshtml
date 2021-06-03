@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("GeneratePDF", "CRN"))
+@using (Html.BeginForm("GeneratePDF", "CRN", FormMethod.Post, new { target = "_blank" }))
 {
     <div>
         <header>
@@ -18,11 +18,13 @@
         <content>
 
             <table class="table table-bordered">
-                <tr>
-                    <th>CRN</th>
-                    <th>Subject Code</th>
-                    <th colspan="2">Description</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>CRN</th>
+                        <th>Subject Code</th>
+                        <th colspan="2">Description</th>
+                    </tr>
+                </thead>
 
                 @*reusable table template*@
                 <tbody>
@@ -33,12 +35,9 @@
             <br>
 
             <div class="crn-button">
-                <div>
-                    <input type="submit" value="Get PDF"/>
-                    @*@Html.ActionLink("Get PDF", "GeneratePDF", Model.CrnTableItems)*@
-                </div>
                 <div class="buttom-btn transparent-shadow-white">
-                    @Html.ActionLink("Back", "SelectSubjectForCRN", "CRN") @*this is like an a tag*@
+                    <input type="submit" value="Save as PDF"/>
+                    @*@Html.ActionLink("Save", "GeneratePDF", new { model = Model }, new { target="_blank", @class="generatecrn-submit-btn"})*@
                 </div>
                 <div class="buttom-btn transparent-shadow-red">
                     <a href="https://my.tafesa.edu.au/">myTAFE SA</a>

@@ -18,6 +18,8 @@ namespace sphelper_try1.Models
         public subject()
         {
             this.crn_detail = new HashSet<crn_detail>();
+            this.prerequisites = new HashSet<prerequisite>();
+            this.studyplan_subject = new HashSet<studyplan_subject>();
             this.subject_competency = new HashSet<subject_competency>();
             this.subject_qualification = new HashSet<subject_qualification>();
         }
@@ -28,6 +30,10 @@ namespace sphelper_try1.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<crn_detail> crn_detail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<prerequisite> prerequisites { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<studyplan_subject> studyplan_subject { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<subject_competency> subject_competency { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

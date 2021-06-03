@@ -2,7 +2,6 @@
     /*padding-top: 50px;*/
     padding-bottom: 20px;
     /*font-size: 1em;*/
-    
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -18,24 +17,99 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    /*width: 280px;*/
+#toggle {
+    height: 50px;
+}
+
+.showcase {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 100vh;
+    background: white;
+    transition: 1s;
+}
+
+.showcase.isactive {
+    left: -300px;
 }
 
 header:after{
     margin-bottom: 2em;
 }
 
-.navbar-style {
+.menubar-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.menubar-container a {
+    width: 96%;
+}
+
+.menubar-container img {
+    width: 50px;
+}
+
+.menubar {
+    width: 100%;
+    background: white;
     border-bottom: 1px solid #c4c4c4;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    background-color: white;
-} 
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menubar a {
+    padding: 15px 0 ;
+}
+
+.menu {
+    position: absolute;
+    width: 300px;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    background: linear-gradient( 135deg,#ff0000,#be1428);
+    z-index: 200;
+}
+
+.menu ul {
+    text-decoration: none;
+    list-style: none;
+    font-size: 28px;
+    font-weight: 600;
+    height: 100vh;
+    padding: 1em;
+}
+
+.menu li {
+    padding: 1em 0;
+}
+
+.menu a:hover {
+    text-decoration: none;
+}
+
+.menu a {
+    color: white;
+    display: block;
+}
+
+.logout {
+    text-decoration: underline;
+    position: absolute;
+    bottom: 0;
+    font-size: 16px;
+    font-weight: 100;
+    margin-bottom: 1.5em;
+}
 
 .logo {
     font-weight: bold;
@@ -57,23 +131,42 @@ h2 {
 }
 
 .login-container {
-    height: 70vh;
     padding-top: 4em;
     font-size: 1em;
 }
 
+.student-info {
+    padding-bottom: 1em;
+}
+
+.login-align {
+    position: absolute;
+    left: 15%;
+}
+
+.login-container p {
+    font-size: 0.8em;
+    padding-bottom: 1em;
+}
+
 .index-container {
     padding-top: 0;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
 }
 
 .index-container h1{
     font-weight: bold;
     margin-bottom: 20px;
+    font-size: 52px;
 }
 
-.login-container p {
-    font-size: 0.9em;
-}
+
 
 .textfields {
     padding: 1.5em 0;
@@ -111,12 +204,25 @@ h2 {
 
 .buttom-btn {
     display: inline-block;
-    width: 15%;
-    height: 32px;
-    height: 48px;
-    padding: 16px 8px;
+    width: 20%;
     text-align: center;
 }
+
+.buttom-btn a, .buttom-btn input[type="submit"] {
+    width: 100%;
+    padding: 14px 0; 
+}
+
+.buttom-btn input[type="submit"]{
+    border: none;
+background: transparent;
+}
+
+.buttom-btn a {
+    display:block;
+}
+
+
 .transparent-shadow-red {
     background: linear-gradient(135deg,#ff0000,#be1428);
     border-radius: 15px;
@@ -143,7 +249,7 @@ h2 {
     border-radius: 15px;
     font-size: 1em;
     margin-right: 1%;
-    margin-left: 68.4%;
+    margin-left: 58.4%;
 }
 
 .transparent-shadow-white:hover {
@@ -156,9 +262,8 @@ h2 {
 }
 
 .transparent-shadow-white a:hover {
-        color: #ff0000;
-        
-    }
+    color: #ff0000;
+}
     
 
 .seekadvice-shadow {
@@ -187,13 +292,14 @@ h2 {
     margin-bottom: 2em
 }
 
-.home-header {
-    padding: 0 0 32px 0;
-}
-
 .home-header h1 {
     margin-top: 0;
     font-weight: bold;
+    padding: 36px 0;
+}
+
+.home-header span {
+    font-weight: 100;
 }
 
 .home-jumbotron {
@@ -214,9 +320,9 @@ h2 {
 }
 
 .home-rows {
-    /*margin-bottom: 1.5em;*/
+    margin-bottom: 1.5em;
     display: inline-block;
-    width: 30%;
+    width: 45%;
     text-align: center;
 }
 
@@ -236,15 +342,19 @@ h2 {
 .jumbotron-arrow {
     width: 3%;
     margin-left: 92%;
-    padding: 4.6% 0;
+    right: 0;
     display: block;
+    position: relative;
+    bottom: 0;
+    padding-bottom: 1.3em;
 }
 
 .home-actionlink {
     color: black;
     font-size: 1.2em;
     display: block;
-    padding: 2em 0;
+    padding: 2em;
+    text-align: left;
 }
 
 .home-actionlink:hover{
@@ -256,15 +366,14 @@ h2 {
     color: white;
     font-size: 1.2em;
     display: block;
-    padding: 1em;
+    padding: 2em 2em 0.5em 2em;
+    text-align: left;
 }
 
 .home-actionlink-big:hover {
     text-decoration: none;
     color: white;
 }
-
-
 
 .buff2 {
     padding-bottom: 5em;
@@ -286,8 +395,8 @@ h2 {
     padding: 0;
 }
 
-.studyplan-h1 {
-    
+.studyplan-ddl {
+    padding-bottom: 2em;
 }
 
 .studyplan-p {
@@ -394,8 +503,116 @@ select::-ms-expand {
     animation: ease;
 }
 
+.checkboxitem input[type="checkbox"][disabled] {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ccc;
+    margin-left: 30%;
+    border-radius: 100px;
+    display: inline-block;
+    position: relative;
+}
+
+.prereq-subj {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.seekadvice-textarea
+{
+    height: 180px;
+}
+
+.remove-crn {
+    /*padding: 0 30%;*/
+}
+
+.delete-icon {
+    position: relative;
+    margin: auto;
+    display: flex;
+    align-self: center;
+    top: 0;
+    justify-content: center;
+    border: none;
+}
+
+@media screen and (min-width: 980px) {
+    .upper-box, .lower-box {
+        width: 100%;
+        display: flex;
+        justify-content:space-between;
+    }
+
+    .home-header h1 {
+        margin-top: 0;
+        font-weight: bold;
+        padding: 128px 0;
+        font-size: 64px;
+    }
+
+/*from stackoverflow*/
+    .navbar-header {
+        float: none;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+
+    .navbar-nav {
+        float: none !important;
+        margin: 7.5px -15px;
+    }
+    
+    .navbar-nav > li {
+        float: none;
+    }
+
+    .navbar-nav > li > a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .navbar-text {
+        float: none;
+        margin: 15px 0;
+    }
+    /* since 3.1.0 */
+    .navbar-collapse.collapse.in {
+        display: block !important;
+    }
+
+    .collapsing {
+        overflow: hidden !important;
+    }
+}
+
+/*@media screen and (min-width: 768px) {
+    .login-align {
+        padding: 20px;
+        margin: 0;
+    }
+}*/
+
 
 @media screen and (max-width: 480px) {
+    .login-align {
+        height: 20vh;
+        width: 100%;
+        margin: 0;
+    }
+
     h1 {
        font-size: 24px;
        margin: 1em 0;
@@ -405,6 +622,16 @@ select::-ms-expand {
    p {
        font-size: 1em !important;
    }
+
+   .menubar {
+       padding: 0 15px;
+   }
+
+   .login-align {
+       padding: 15px;
+   }
+
+    
 
     .studyplan-ddl select {
         display: inline-block;
@@ -419,14 +646,12 @@ select::-ms-expand {
 }
 
     .buttom-btn {
-        width: 47%;
+        width: 48.9%;
         margin-left: 0;
     }
 
     .crn-button {
-        position: absolute;
         bottom: 0;
-        width: 93%;
         padding: 16px 0;
     }
 
@@ -458,8 +683,222 @@ select::-ms-expand {
     }
 
     .middle {
-        margin-left: 0;
+        margin-left: 0; 
         margin-right: 0;
     }
 }
+
+.shape-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60vw;
+    height: 100vh;
+    opacity: 20;
+}
+
+.shape-bg ul {
+   /*list-style: none;*/
+}
+
+.circles, .triangles, .squares, .strips {
+    position: absolute;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    height: 100vh;
+}
+.circles li {
+    background: linear-gradient(135deg, #ff0000, #be1428);
+    margin: 50px;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+}
+
+.circles li:nth-child(1) {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 5%;
+    left: 10%;
+}
+.circles li:nth-child(2) {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.circles li:nth-child(3) {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 45%;
+    left: 15%;
+}
+.circles li:nth-child(4) {
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    bottom: 20%;
+    right: 0%;
+    margin-right: 20px;
+}
+
+.circles li:hover {
+}
+
+.triangles {
+
+}
+
+.triangles li {
+    background: linear-gradient(135deg, #ff0000, #be1428);
+    margin: 50px;
+    width: 0;
+	height: 0;
+}
+.triangles li:nth-child(1) {
+    
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 35px solid #ff0000;
+    position: absolute;
+    bottom: 1px;
+    right: -4%;
+}
+
+.circles li:nth-child(1):hover {
+    transform: scale(1.5);
+    border-color: orange;
+}
+
+.triangles li:nth-child(2) {
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 25px solid #ff0000;
+    position: absolute;
+    top: -4%;
+    left: 35%;
+}
+
+.triangles li:nth-child(3) {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 15px solid #ff0000;
+    position: absolute;
+    top: 31%;
+    left: -107px;
+}
+
+.triangles li:nth-child(4) {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 10px solid #ff0000;
+    position: absolute;
+    top: 20%;
+    right: 10%;
+}
+
+
+.triangles li:hover {
+   transform: scale(1.5);
+   border-color: orange;
+}
+
+.squares li {
+    background: linear-gradient(135deg, #ff0000, #be1428);
+    margin: 50px;
+    /*width: 50px;
+    height: 50px;*/
+}
+
+.squares li:nth-child(1) {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: 20%;
+    left: 30%;
+}
+
+.squares li:nth-child(2) {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+}
+
+.squares li:nth-child(3) {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+}
+
+.squares li:nth-child(4) {
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    top: 65%;
+    margin-left: 10px;
+}
+
+.squares li:hover {
+
+}
+
+.strips li {
+    background: #ff0000;
+    margin: 50px;
+}
+
+.strips li:nth-child(1) {
+    width: 35px;
+    height: 10px;
+    position: absolute;
+    top: -38px;
+    right: 5%;
+    transform: rotate( 318deg );
+
+}
+
+.strips li:nth-child(2) {
+    width: 25px;
+    height: 10px;
+    position: absolute;
+    top: 39%;
+    left: 47%;
+    transform: rotate(45deg);
+
+}
+
+.strips li:nth-child(3) {
+    width: 15px;
+    height: 5px;
+    position: absolute;
+    bottom: 2px;
+    left: 55%;
+}
+
+.strips li:nth-child(4) {
+    width: 10px;
+    height: 2px;
+    position: absolute;
+    bottom: 30%;
+    right: 20%;
+    transform: rotate(90deg);
+}
+
+.strips li:hover {
+
+}
+
+
+
 

@@ -4,13 +4,20 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SPHelperModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SPHelperModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="campus">
           <Key>
             <PropertyRef Name="CampusCode" />
           </Key>
           <Property Name="CampusCode" Type="nchar" MaxLength="3" Nullable="false" />
           <Property Name="CampusName" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="combination_operator">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="operator" Type="varchar" MaxLength="6" Nullable="false" />
         </EntityType>
         <EntityType Name="competency">
           <Key>
@@ -52,7 +59,7 @@
           <Property Name="SubjectCode" Type="nvarchar" MaxLength="32" Nullable="false" />
           <Property Name="CampusCode" Type="nchar" MaxLength="3" Nullable="false" />
           <Property Name="LecturerID" Type="nchar" MaxLength="9" Nullable="false" />
-          <Property Name="DepartmentCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DepartmentCode" Type="nvarchar" MaxLength="8" />
           <Property Name="FreezeDate" Type="date" Nullable="false" />
           <Property Name="DateCreated" Type="date" Nullable="false" />
         </EntityType>
@@ -95,6 +102,24 @@
           <Property Name="GivenName" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="prerequisite">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="SubjectCode" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="SubjectCode" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Extra" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="prerequisite_combination">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudyPlanCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SubjectCode" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Combination_Id" Type="varchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="qualification">
           <Key>
@@ -177,6 +202,7 @@
           </Key>
           <Property Name="SubjectCode" Type="nvarchar" MaxLength="32" Nullable="false" />
           <Property Name="TafeCompCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="extra" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="subject_qualification">
           <Key>
@@ -326,6 +352,80 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_crn_department">
+          <End Role="department" Type="Self.department" Multiplicity="0..1" />
+          <End Role="crn_detail" Type="Self.crn_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="DepartmentCode" />
+            </Principal>
+            <Dependent Role="crn_detail">
+              <PropertyRef Name="DepartmentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prereq_prereq_comb">
+          <End Role="prerequisite_combination" Type="Self.prerequisite_combination" Multiplicity="1" />
+          <End Role="prerequisite" Type="Self.prerequisite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="prerequisite_combination">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="prerequisite">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prereq_subject">
+          <End Role="subject" Type="Self.subject" Multiplicity="1" />
+          <End Role="prerequisite" Type="Self.prerequisite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="prerequisite">
+              <PropertyRef Name="SubjectCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prerequisite_combination">
+          <End Role="combination_operator" Type="Self.combination_operator" Multiplicity="1" />
+          <End Role="prerequisite_combination" Type="Self.prerequisite_combination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="combination_operator">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="prerequisite_combination">
+              <PropertyRef Name="Combination_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prerequisite_studyplan_subject">
+          <End Role="studyplan_subject" Type="Self.studyplan_subject" Multiplicity="1" />
+          <End Role="prerequisite_combination" Type="Self.prerequisite_combination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="studyplan_subject">
+              <PropertyRef Name="StudyPlanCode" />
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="prerequisite_combination">
+              <PropertyRef Name="StudyPlanCode" />
+              <PropertyRef Name="SubjectCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudyPlanSubject_SubjectCode">
+          <End Role="subject" Type="Self.subject" Multiplicity="1" />
+          <End Role="studyplan_subject" Type="Self.studyplan_subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="studyplan_subject">
+              <PropertyRef Name="SubjectCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="student_grade$FK_StudentGrade_CRN">
           <End Role="crn_detail" Type="Self.crn_detail" Multiplicity="1" />
           <End Role="student_grade" Type="Self.student_grade" Multiplicity="*" />
@@ -468,6 +568,7 @@
         </Association>
         <EntityContainer Name="SPHelperModelStoreContainer">
           <EntitySet Name="campus" EntityType="Self.campus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="combination_operator" EntityType="Self.combination_operator" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="competency" EntityType="Self.competency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="competency_qualification" EntityType="Self.competency_qualification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="competency_type" EntityType="Self.competency_type" Schema="dbo" store:Type="Tables" />
@@ -476,6 +577,8 @@
           <EntitySet Name="day_of_week" EntityType="Self.day_of_week" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lecturer" EntityType="Self.lecturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prerequisite" EntityType="Self.prerequisite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prerequisite_combination" EntityType="Self.prerequisite_combination" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="qualification" EntityType="Self.qualification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="student_grade" EntityType="Self.student_grade" Schema="dbo" store:Type="Tables" />
@@ -526,6 +629,30 @@
             <End Role="term_datetime" EntitySet="term_datetime" />
             <End Role="crn_session_timetable" EntitySet="crn_session_timetable" />
           </AssociationSet>
+          <AssociationSet Name="FK_crn_department" Association="Self.FK_crn_department">
+            <End Role="department" EntitySet="department" />
+            <End Role="crn_detail" EntitySet="crn_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prereq_prereq_comb" Association="Self.FK_prereq_prereq_comb">
+            <End Role="prerequisite_combination" EntitySet="prerequisite_combination" />
+            <End Role="prerequisite" EntitySet="prerequisite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prereq_subject" Association="Self.FK_prereq_subject">
+            <End Role="subject" EntitySet="subject" />
+            <End Role="prerequisite" EntitySet="prerequisite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prerequisite_combination" Association="Self.FK_Prerequisite_combination">
+            <End Role="combination_operator" EntitySet="combination_operator" />
+            <End Role="prerequisite_combination" EntitySet="prerequisite_combination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prerequisite_studyplan_subject" Association="Self.FK_prerequisite_studyplan_subject">
+            <End Role="studyplan_subject" EntitySet="studyplan_subject" />
+            <End Role="prerequisite_combination" EntitySet="prerequisite_combination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudyPlanSubject_SubjectCode" Association="Self.FK_StudyPlanSubject_SubjectCode">
+            <End Role="subject" EntitySet="subject" />
+            <End Role="studyplan_subject" EntitySet="studyplan_subject" />
+          </AssociationSet>
           <AssociationSet Name="student_grade$FK_StudentGrade_CRN" Association="Self.student_grade$FK_StudentGrade_CRN">
             <End Role="crn_detail" EntitySet="crn_detail" />
             <End Role="student_grade" EntitySet="student_grade" />
@@ -571,7 +698,8 @@
             <End Role="subject_qualification" EntitySet="subject_qualification" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SPHelperModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -583,6 +711,14 @@
           <Property Name="CampusName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="crn_detail" Relationship="Self.crn_detail_FK_CRNDetail_CampusCode" FromRole="campus" ToRole="crn_detail" />
           <NavigationProperty Name="crn_session_timetable" Relationship="Self.crn_session_timetable_FK_Session_CampusCode" FromRole="campus" ToRole="crn_session_timetable" />
+        </EntityType>
+        <EntityType Name="combination_operator">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="operator" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="prerequisite_combination" Relationship="Self.FK_Prerequisite_combination" FromRole="combination_operator" ToRole="prerequisite_combination" />
         </EntityType>
         <EntityType Name="competency">
           <Key>
@@ -628,7 +764,7 @@
           <Property Name="SubjectCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CampusCode" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="LecturerID" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="DepartmentCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DepartmentCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="FreezeDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="campu" Relationship="Self.crn_detail_FK_CRNDetail_CampusCode" FromRole="crn_detail" ToRole="campus" />
@@ -637,6 +773,7 @@
           <NavigationProperty Name="subject" Relationship="Self.crn_detail_FK_CRNDetail_SubjectCode" FromRole="crn_detail" ToRole="subject" />
           <NavigationProperty Name="term_datetime" Relationship="Self.crn_detail_FK_CRNDetail_TermStart" FromRole="crn_detail" ToRole="term_datetime" />
           <NavigationProperty Name="crn_session_timetable" Relationship="Self.crn_session_timetable_FK_Session_CRN" FromRole="crn_detail" ToRole="crn_session_timetable" />
+          <NavigationProperty Name="department" Relationship="Self.FK_crn_department" FromRole="crn_detail" ToRole="department" />
           <NavigationProperty Name="student_grade" Relationship="Self.student_grade_FK_StudentGrade_CRN" FromRole="crn_detail" ToRole="student_grade" />
         </EntityType>
         <EntityType Name="crn_session_timetable">
@@ -674,6 +811,7 @@
           </Key>
           <Property Name="DepartmentCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Department1" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="crn_detail" Relationship="Self.FK_crn_department" FromRole="department" ToRole="crn_detail" />
         </EntityType>
         <EntityType Name="lecturer">
           <Key>
@@ -684,6 +822,29 @@
           <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="EmailAddress" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="crn_detail" Relationship="Self.crn_detail_FK_CRNDetail_LecturerID" FromRole="lecturer" ToRole="crn_detail" />
+        </EntityType>
+        <EntityType Name="prerequisite">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="SubjectCode" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="SubjectCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Extra" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="prerequisite_combination" Relationship="Self.FK_prereq_prereq_comb" FromRole="prerequisite" ToRole="prerequisite_combination" />
+          <NavigationProperty Name="subject" Relationship="Self.FK_prereq_subject" FromRole="prerequisite" ToRole="subject" />
+        </EntityType>
+        <EntityType Name="prerequisite_combination">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudyPlanCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SubjectCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Combination_Id" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="combination_operator" Relationship="Self.FK_Prerequisite_combination" FromRole="prerequisite_combination" ToRole="combination_operator" />
+          <NavigationProperty Name="prerequisites" Relationship="Self.FK_prereq_prereq_comb" FromRole="prerequisite_combination" ToRole="prerequisite" />
+          <NavigationProperty Name="studyplan_subject" Relationship="Self.FK_prerequisite_studyplan_subject" FromRole="prerequisite_combination" ToRole="studyplan_subject" />
         </EntityType>
         <EntityType Name="qualification">
           <Key>
@@ -762,6 +923,8 @@
           <Property Name="SubjectCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TimingSemester" Type="Int32" Nullable="false" />
           <Property Name="TimingSemesterTerm" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="prerequisite_combination" Relationship="Self.FK_prerequisite_studyplan_subject" FromRole="studyplan_subject" ToRole="prerequisite_combination" />
+          <NavigationProperty Name="subject" Relationship="Self.FK_StudyPlanSubject_SubjectCode" FromRole="studyplan_subject" ToRole="subject" />
         </EntityType>
         <EntityType Name="subject">
           <Key>
@@ -771,6 +934,8 @@
           <Property Name="SubjectDescription" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SubjectLongDescription" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="crn_detail" Relationship="Self.crn_detail_FK_CRNDetail_SubjectCode" FromRole="subject" ToRole="crn_detail" />
+          <NavigationProperty Name="prerequisites" Relationship="Self.FK_prereq_subject" FromRole="subject" ToRole="prerequisite" />
+          <NavigationProperty Name="studyplan_subject" Relationship="Self.FK_StudyPlanSubject_SubjectCode" FromRole="subject" ToRole="studyplan_subject" />
           <NavigationProperty Name="subject_competency" Relationship="Self.subject_competency_FK_SubjComp_SubjectCode" FromRole="subject" ToRole="subject_competency" />
           <NavigationProperty Name="subject_qualification" Relationship="Self.subject_qualification_FK_SubjQual_SubjectCode" FromRole="subject" ToRole="subject_qualification" />
         </EntityType>
@@ -781,6 +946,7 @@
           </Key>
           <Property Name="SubjectCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TafeCompCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="extra" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="competency" Relationship="Self.subject_competency_FK_SubjComp_TafeCompCode" FromRole="subject_competency" ToRole="competency" />
           <NavigationProperty Name="subject" Relationship="Self.subject_competency_FK_SubjComp_SubjectCode" FromRole="subject_competency" ToRole="subject" />
         </EntityType>
@@ -831,6 +997,18 @@
             </Principal>
             <Dependent Role="crn_session_timetable">
               <PropertyRef Name="CampusCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prerequisite_combination">
+          <End Role="combination_operator" Type="Self.combination_operator" Multiplicity="1" />
+          <End Role="prerequisite_combination" Type="Self.prerequisite_combination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="combination_operator">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="prerequisite_combination">
+              <PropertyRef Name="Combination_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -924,6 +1102,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_crn_department">
+          <End Role="department" Type="Self.department" Multiplicity="0..1" />
+          <End Role="crn_detail" Type="Self.crn_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="DepartmentCode" />
+            </Principal>
+            <Dependent Role="crn_detail">
+              <PropertyRef Name="DepartmentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="student_grade_FK_StudentGrade_CRN">
           <End Role="crn_detail" Type="Self.crn_detail" Multiplicity="1" />
           <End Role="student_grade" Type="Self.student_grade" Multiplicity="*" />
@@ -963,6 +1153,44 @@
             <Dependent Role="crn_session_timetable">
               <PropertyRef Name="TermCodeStart" />
               <PropertyRef Name="TermYearStart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prereq_prereq_comb">
+          <End Role="prerequisite_combination" Type="Self.prerequisite_combination" Multiplicity="1" />
+          <End Role="prerequisite" Type="Self.prerequisite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="prerequisite_combination">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="prerequisite">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prereq_subject">
+          <End Role="subject" Type="Self.subject" Multiplicity="1" />
+          <End Role="prerequisite" Type="Self.prerequisite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="prerequisite">
+              <PropertyRef Name="SubjectCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prerequisite_studyplan_subject">
+          <End Role="studyplan_subject" Type="Self.studyplan_subject" Multiplicity="1" />
+          <End Role="prerequisite_combination" Type="Self.prerequisite_combination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="studyplan_subject">
+              <PropertyRef Name="StudyPlanCode" />
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="prerequisite_combination">
+              <PropertyRef Name="StudyPlanCode" />
+              <PropertyRef Name="SubjectCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1054,6 +1282,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StudyPlanSubject_SubjectCode">
+          <End Role="subject" Type="Self.subject" Multiplicity="1" />
+          <End Role="studyplan_subject" Type="Self.studyplan_subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="studyplan_subject">
+              <PropertyRef Name="SubjectCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="subject_competency_FK_SubjComp_SubjectCode">
           <End Role="subject" Type="Self.subject" Multiplicity="1" />
           <End Role="subject_competency" Type="Self.subject_competency" Multiplicity="*" />
@@ -1080,6 +1320,7 @@
         </Association>
         <EntityContainer Name="SPHelperEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="campus" EntityType="Self.campu" />
+          <EntitySet Name="combination_operator" EntityType="Self.combination_operator" />
           <EntitySet Name="competencies" EntityType="Self.competency" />
           <EntitySet Name="competency_qualification" EntityType="Self.competency_qualification" />
           <EntitySet Name="competency_type" EntityType="Self.competency_type" />
@@ -1088,6 +1329,8 @@
           <EntitySet Name="day_of_week" EntityType="Self.day_of_week" />
           <EntitySet Name="departments" EntityType="Self.department" />
           <EntitySet Name="lecturers" EntityType="Self.lecturer" />
+          <EntitySet Name="prerequisites" EntityType="Self.prerequisite" />
+          <EntitySet Name="prerequisite_combination" EntityType="Self.prerequisite_combination" />
           <EntitySet Name="qualifications" EntityType="Self.qualification" />
           <EntitySet Name="students" EntityType="Self.student" />
           <EntitySet Name="student_grade" EntityType="Self.student_grade" />
@@ -1105,6 +1348,10 @@
           <AssociationSet Name="crn_session_timetable_FK_Session_CampusCode" Association="Self.crn_session_timetable_FK_Session_CampusCode">
             <End Role="campus" EntitySet="campus" />
             <End Role="crn_session_timetable" EntitySet="crn_session_timetable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prerequisite_combination" Association="Self.FK_Prerequisite_combination">
+            <End Role="combination_operator" EntitySet="combination_operator" />
+            <End Role="prerequisite_combination" EntitySet="prerequisite_combination" />
           </AssociationSet>
           <AssociationSet Name="crn_detail_FK_CRNDetail_TafeCompCode" Association="Self.crn_detail_FK_CRNDetail_TafeCompCode">
             <End Role="competency" EntitySet="competencies" />
@@ -1134,6 +1381,10 @@
             <End Role="crn_detail" EntitySet="crn_detail" />
             <End Role="crn_session_timetable" EntitySet="crn_session_timetable" />
           </AssociationSet>
+          <AssociationSet Name="FK_crn_department" Association="Self.FK_crn_department">
+            <End Role="department" EntitySet="departments" />
+            <End Role="crn_detail" EntitySet="crn_detail" />
+          </AssociationSet>
           <AssociationSet Name="student_grade_FK_StudentGrade_CRN" Association="Self.student_grade_FK_StudentGrade_CRN">
             <End Role="crn_detail" EntitySet="crn_detail" />
             <End Role="student_grade" EntitySet="student_grade" />
@@ -1145,6 +1396,18 @@
           <AssociationSet Name="crn_session_timetable_FK_Session_TermStart" Association="Self.crn_session_timetable_FK_Session_TermStart">
             <End Role="term_datetime" EntitySet="term_datetime" />
             <End Role="crn_session_timetable" EntitySet="crn_session_timetable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prereq_prereq_comb" Association="Self.FK_prereq_prereq_comb">
+            <End Role="prerequisite_combination" EntitySet="prerequisite_combination" />
+            <End Role="prerequisite" EntitySet="prerequisites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prereq_subject" Association="Self.FK_prereq_subject">
+            <End Role="subject" EntitySet="subjects" />
+            <End Role="prerequisite" EntitySet="prerequisites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prerequisite_studyplan_subject" Association="Self.FK_prerequisite_studyplan_subject">
+            <End Role="studyplan_subject" EntitySet="studyplan_subject" />
+            <End Role="prerequisite_combination" EntitySet="prerequisite_combination" />
           </AssociationSet>
           <AssociationSet Name="student_studyplan_FK_StudentStudyplan_QualCode" Association="Self.student_studyplan_FK_StudentStudyplan_QualCode">
             <End Role="qualification" EntitySet="qualifications" />
@@ -1174,6 +1437,10 @@
             <End Role="term_datetime" EntitySet="term_datetime" />
             <End Role="student_studyplan" EntitySet="student_studyplan" />
           </AssociationSet>
+          <AssociationSet Name="FK_StudyPlanSubject_SubjectCode" Association="Self.FK_StudyPlanSubject_SubjectCode">
+            <End Role="subject" EntitySet="subjects" />
+            <End Role="studyplan_subject" EntitySet="studyplan_subject" />
+          </AssociationSet>
           <AssociationSet Name="subject_competency_FK_SubjComp_SubjectCode" Association="Self.subject_competency_FK_SubjComp_SubjectCode">
             <End Role="subject" EntitySet="subjects" />
             <End Role="subject_competency" EntitySet="subject_competency" />
@@ -1194,6 +1461,14 @@
               <MappingFragment StoreEntitySet="campus">
                 <ScalarProperty Name="CampusCode" ColumnName="CampusCode" />
                 <ScalarProperty Name="CampusName" ColumnName="CampusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="combination_operator">
+            <EntityTypeMapping TypeName="SPHelperModel.combination_operator">
+              <MappingFragment StoreEntitySet="combination_operator">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="operator" ColumnName="operator" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1284,6 +1559,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="prerequisites">
+            <EntityTypeMapping TypeName="SPHelperModel.prerequisite">
+              <MappingFragment StoreEntitySet="prerequisite">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
+                <ScalarProperty Name="Extra" ColumnName="Extra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prerequisite_combination">
+            <EntityTypeMapping TypeName="SPHelperModel.prerequisite_combination">
+              <MappingFragment StoreEntitySet="prerequisite_combination">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StudyPlanCode" ColumnName="StudyPlanCode" />
+                <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
+                <ScalarProperty Name="Combination_Id" ColumnName="Combination_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="qualifications">
             <EntityTypeMapping TypeName="SPHelperModel.qualification">
               <MappingFragment StoreEntitySet="qualification">
@@ -1365,6 +1659,7 @@
               <MappingFragment StoreEntitySet="subject_competency">
                 <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
                 <ScalarProperty Name="TafeCompCode" ColumnName="TafeCompCode" />
+                <ScalarProperty Name="extra" ColumnName="extra" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

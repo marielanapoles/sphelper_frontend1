@@ -51,9 +51,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="IronPdf.Assets.Rendering.Windows, Version=22.0.0.0, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPdf.Assets.Rendering.Windows.22.0.0\lib\net40\IronPdf.Assets.Rendering.Windows.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
@@ -145,6 +142,9 @@
     <Compile Include="Models\campu.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\combination_operator.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\competency.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
@@ -172,9 +172,18 @@
     <Compile Include="Models\lecturer.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Prereq.cs" />
+    <Compile Include="Models\prerequisite.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\prerequisite_combination.cs">
+      <DependentUpon>SPHelperDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\qualification.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SeekAdvice.cs" />
+    <Compile Include="Models\SemesterNow.cs" />
     <Compile Include="Models\semGroup.cs" />
     <Compile Include="Models\SPHelperDbModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -201,6 +210,7 @@
     <Compile Include="Models\student_studyplan.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StudyPlanSubjects.cs" />
     <Compile Include="Models\studyplan_qualification.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
@@ -211,6 +221,7 @@
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SubjectCheckItems.cs" />
+    <Compile Include="Models\SubjectResults.cs" />
     <Compile Include="Models\subject_competency.cs">
       <DependentUpon>SPHelperDbModel.tt</DependentUpon>
     </Compile>
@@ -237,6 +248,7 @@
     <Content Include="Content\img\arrow.png" />
     <Content Include="Content\img\arrow1.png" />
     <Content Include="Content\img\cross.png" />
+    <Content Include="Content\img\menu.png" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -256,6 +268,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="App_Browsers\qt.browser" />
     <EntityDeploy Include="Models\SPHelperDbModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SPHelperDbModel.Designer.cs</LastGenOutput>
@@ -263,7 +276,6 @@
     <Content Include="Models\SPHelperDbModel.edmx.diagram">
       <DependentUpon>SPHelperDbModel.edmx</DependentUpon>
     </Content>
-    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -297,6 +309,9 @@
     <Content Include="Views\CRN\SelectSubjectForCRN.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\TableItemsSelectSubject.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TableItemsCrn.cshtml" />
+    <Content Include="Views\Home\SendMail.cshtml" />
+    <Content Include="Views\CRN\SavedCRNs.cshtml" />
+    <Content Include="Views\CRN\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

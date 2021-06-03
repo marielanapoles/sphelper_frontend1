@@ -18,26 +18,14 @@ namespace sphelper_try1.Controllers
         //public ActionResult Index(string studentId, string qualificationCode, string studyplanCode, string studentName)
         public ActionResult Index()
         {
-            var student = MemoryCache.Default["studentinfo"] as studentinfo;
-            //get qualification, tafecode & national code
-            var qualification = Student_StudyplanManager.FindQualificationByStudentId(student.StudentId);
+            //get student info from the memory
+            var studentInfo = MemoryCache.Default["studentinfo"] as studentinfo;
 
-            //get subjects based on studyplan code
-            var query = from subj in db.subjects.ToList()
-                        join sp_subj in db.studyplan_subject.ToList()
-                        on subj.SubjectCode equals sp_subj.SubjectCode
-                        orderby sp_subj.TimingSemesterTerm
-                        where sp_subj.StudyPlanCode == student.StudyPlanCode
-                        select new
-                        {
-                            Semester = sp_subj.TimingSemester,
-                            SubjectCode = subj.SubjectCode,
-                            SubjectTitle = subj.SubjectDescription,
-                            SubjectDescription = subj.SubjectLongDescription
-                       };
+            //get stubject for each studyplan
+            var studyplansubject = studentInfo.StudyPlanSubjects;
 
             //group the subjects by semester
-            var semGroup = query.GroupBy(x => x.Semester).ToList();
+            var semGroup = studyplansubject.GroupBy(x => x.Semester).ToList();
             
             //create an instance of table items for my displa template
             var tableItems = new List<TableItems>();
@@ -56,7 +44,7 @@ namespace sphelper_try1.Controllers
                         SubjectCode = x.SubjectCode,
                         SubjectTitle = x.SubjectTitle,
                         SubjectDescription = x.SubjectDescription,
-                        Status = Student_StudyplanManager.FindStudentGrade(student.StudentId, 2, 2019, x.SubjectCode)
+                        Status = Student_StudyplanManager.FindSubjectGrade(x.SubjectCode)
                     }).ToList(),
                 });
 
@@ -65,10 +53,10 @@ namespace sphelper_try1.Controllers
             };
 
             //Pass all the data I need to the viewmodel
-            viewModel.StudentName = student.Name;
-            viewModel.Qualification = qualification.QualName;
-            viewModel.NationalCode = qualification.NationalQualCode;
-            viewModel.TafeCode = qualification.TafeQualCode;
+            viewModel.StudentName = studentInfo.Name;
+            viewModel.Qualification = studentInfo.Qualification.QualName;
+            viewModel.NationalCode = studentInfo.Qualification.NationalQualCode;
+            viewModel.TafeCode = studentInfo.Qualification.TafeQualCode;
             viewModel.TableItems = tableItems;
 
             //pass the ViewModel to the View

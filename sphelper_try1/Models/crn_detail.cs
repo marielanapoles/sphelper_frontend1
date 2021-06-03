@@ -41,6 +41,7 @@ namespace sphelper_try1.Models
         public virtual term_datetime term_datetime { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<crn_session_timetable> crn_session_timetable { get; set; }
+        public virtual department department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<student_grade> student_grade { get; set; }
     }
