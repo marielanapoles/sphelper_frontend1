@@ -1,5 +1,6 @@
 ﻿@model sphelper_try1.Models.student
 @{
+    ViewBag.Title = "Log In";
     Layout = null;
 }
 
@@ -8,33 +9,37 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - SP Helper</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @using (Html.BeginForm("Index", "Home"))
+    @*@using (Html.BeginForm("Index", "Home"))*@
+    @using (Html.BeginForm())
     {
-    <div class="container body-content index-container">
-        <div class="form-horizontal login-align">
-            <h1>SP Helper</h1>
-            <h3>Welcome Students! </h3>
-            <div class=" login-container">
-                <p>Sign in with your organizational account</p>
-                <div class="form-group col-sm-12 ">
-                    @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "validation" })
-                    @Html.EditorFor(m => m.EmailAddress, "Email Address", new { htmlAttributes = new { @class = "form-control textarea", placeholder = "Email Address" } })
-                </div>
+        @Html.AntiForgeryToken()
+        <div class="container body-content index-container">
+            <div class="form-horizontal login-align">
+                <h1>SP Helper</h1>
+                <h3>Welcome Students! </h3>
+                <div class=" login-container">
+                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+                    <p>Sign in with your organizational account</p>
+                    <div class="form-group col-sm-12 ">
+                        @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "validation" })
+                        @Html.EditorFor(m => m.EmailAddress, "Email Address", new { htmlAttributes = new { @class = "form-control textarea", placeholder = "Email Address" } })
+                    </div>
 
-                <div class="form-group col-sm-12 textarea">
-                    @Html.ValidationMessageFor(m => m.EmailAddress, "Incorrect Password", new { @class = "validation" })
-                    @Html.EditorFor(m => m.EmailAddress, new { htmlAttributes = new { @class = "form-control textarea", placeholder = "Password" } })
-                </div>
-                <div class="form-group col-sm-12">
-                    <input type="submit" value="Log In" class="btn button color-shadow" />
+                    <div class="form-group col-sm-12 textarea">
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "validation" })
+                        @*@Html.PasswordFor(m => m.Password, new { htmlAttributes = new { @class = "form-control textarea", placeholder = "Password" } })*@
+                        @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control textarea", placeholder = "Password" } })
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <input type="submit" value="Log In" class="btn button color-shadow" />
+                    </div>
                 </div>
             </div>
-        </div>
         @*<footer>
             <p>&copy; @DateTime.Now.Year - SP Helper Team</p>
         </footer>*@

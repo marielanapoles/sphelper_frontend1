@@ -4,5 +4,51 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Error</h2>
+<div class="sent-inquiry-container">
+    <div>
+        <img src="~/Content/img/error.png" />
+        <div class="sent-inquiry-text-align">
+            <h1>Empty!</h1>
+            <h3>
+                Please Select Subject First.
+            </h3>
+            @Html.ActionLink("Select Subject", "SelectSubjectForCRN")
+        </div>
+    </div>
+</div>
 
+<div class="shape-bg">
+    <ul class="circles">
+        @* circles *@
+        <li></li> @*big circle*@
+        <li></li> @*med circle*@
+        <li></li> @*sm circle*@
+        <li></li> @*xs circle*@
+
+
+    </ul>
+
+    <ul class="triangles">
+        @* triangles *@
+        <li></li> @*big triangles*@
+        <li></li> @*med triangles*@
+        <li></li> @*sm triangles*@
+        <li></li> @*xs triangles*@
+    </ul>
+
+    <ul class="squares">
+        @*square*@
+        <li></li> @*big square*@
+        <li></li> @*med square*@
+        <li></li> @*sm square*@
+        <li></li> @*xs square*@
+    </ul>
+    <ul class="strips">
+        @*square*@
+        <li></li> @*big strips*@
+        <li></li> @*med strips*@
+        <li></li> @*sm square*@
+        <li></li> @*xs square*@
+    </ul>
+
+</div>

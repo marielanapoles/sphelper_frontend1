@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SPHelperModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SPHelperModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="campus">
           <Key>
             <PropertyRef Name="CampusCode" />
@@ -142,6 +142,7 @@
           <Property Name="GivenName" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="student_grade">
           <Key>
@@ -698,8 +699,7 @@
             <End Role="subject_qualification" EntitySet="subject_qualification" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SPHelperModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -872,6 +872,7 @@
           <Property Name="EmailAddress" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="student_grade" Relationship="Self.student_grade_FK_StudentGrade_Student" FromRole="student" ToRole="student_grade" />
           <NavigationProperty Name="student_studyplan" Relationship="Self.student_studyplan_FK_StudentStudyplan_StudentID" FromRole="student" ToRole="student_studyplan" />
+          <Property Name="Password" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="student_grade">
           <Key>
@@ -1595,6 +1596,7 @@
           <EntitySetMapping Name="students">
             <EntityTypeMapping TypeName="SPHelperModel.student">
               <MappingFragment StoreEntitySet="student">
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="GivenName" ColumnName="GivenName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />

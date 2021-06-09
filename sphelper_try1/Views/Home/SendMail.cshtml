@@ -1,20 +1,74 @@
-﻿@{
+﻿@model sphelper_try1.Models.student
+
+@{
     ViewBag.Title = "SendMailMessage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="sent-inquiry-container">
+    <div>
+        <img src="~/Content/img/success.png" />
+        <div class="sent-inquiry-text-align">
+            <h1>Inquiry Sent!</h1>
+            <h3>
+                Thanks for sending us a message. Your message has been delivered. Please wait for our respond.
+            </h3>
+            @Html.ActionLink("return Home", "Index", Model)
+        </div>
+    </div>
+</div>
 
-<br />  <br />  <br />
+<div class="shape-bg">
+    <ul class="circles">
+        @* circles *@
+        <li></li> @*big circle*@
+        <li></li> @*med circle*@
+        <li></li> @*sm circle*@
+        <li></li> @*xs circle*@
 
-<h1 style="text-align:center">! Message sent successfully !</h1>
-<br />  <br />
+
+    </ul>
+
+    <ul class="triangles">
+        @* triangles *@
+        <li></li> @*big triangles*@
+        <li></li> @*med triangles*@
+        <li></li> @*sm triangles*@
+        <li></li> @*xs triangles*@
+    </ul>
+
+    <ul class="squares">
+        @*square*@
+        <li></li> @*big square*@
+        <li></li> @*med square*@
+        <li></li> @*sm square*@
+        <li></li> @*xs square*@
+    </ul>
+    <ul class="strips">
+        @*square*@
+        <li></li> @*big strips*@
+        <li></li> @*med strips*@
+        <li></li> @*sm square*@
+        <li></li> @*xs square*@
+    </ul>
+
+</div>
 
 
-<p style="text-align:center">
-    The Lecturer you picked will contact you
-    as soon as possible.
-    <br />
+@*<br />  <br />  <br />
 
-    Don't forget to check your email.
-    since the SP Helper system will send to you
-    information about solving the issue selected.
-</p>
+    <h1 style="text-align:center">! Message sent successfully !</h1>
+    <br />  <br />
+
+
+    <p style="text-align:center">
+        The Lecturer you picked will contact you
+        as soon as possible.
+        <br />
+
+        Don't forget to check your email.
+        since the SP Helper system will send to you
+        information about solving the issue selected.
+    </p>*@
+
+

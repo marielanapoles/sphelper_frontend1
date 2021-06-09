@@ -18,30 +18,32 @@ namespace sphelper_try1.Controllers
         // GET: CRN
         public ActionResult Index(CrnDetailsVM model)
         {
-            //convert crnvm to crndetailsvm
-            
-            if (model.CrnTableItems.Count != 0 )
+            if (Session["StudentID"] != null)
             {
-                var viewModel = new CrnDetailsVM() { CrnTableItems = model.CrnTableItems };
-                return View(viewModel);
-                
-            } else
-            {
-                var dataInMemory = MemoryCache.Default["mycrns"] as CrnDetailsVM;
-                if (dataInMemory != null)
+
+                if (model.CrnTableItems.Count != 0)
                 {
-                    return View(dataInMemory);
+                    var viewModel = new CrnDetailsVM() { CrnTableItems = model.CrnTableItems };
+                    return View(viewModel);
+
                 }
                 else
                 {
-                    return View("Error");
+                    var dataInMemory = MemoryCache.Default["mycrns"] as CrnDetailsVM;
+                    if (dataInMemory != null)
+                    {
+                        return View(dataInMemory);
+                    }
+                    else
+                    {
+                        return View("Error");
+                    }
                 }
             }
-
-            
-            
-            //redirect to index
-            
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
 
         public ActionResult SavedCRNs()
@@ -52,47 +54,54 @@ namespace sphelper_try1.Controllers
         [HttpGet]
         public ActionResult SelectSubjectForCRN()
         {
-            var studentInfo = MemoryCache.Default["studentinfo"] as studentinfo;
-
-            var studyplansubject = studentInfo.StudyPlanSubjects;
-
-            var semGroup = studyplansubject.GroupBy(x => x.Semester).ToList();
-
-            //tableitems 
-            var tableItemsSelectSubject = new List<TableItemsSelectSubject>();
-            
-            //I made an instance f a List<TableItems> where I use foreach loop to add data to this list
-            foreach (var group in semGroup)
+            if (Session["StudentID"] != null)
             {
-                tableItemsSelectSubject.Add(new TableItemsSelectSubject()
+                var studentInfo = MemoryCache.Default["studentinfo"] as studentinfo;
+                var studyplansubject = studentInfo.StudyPlanSubjects;
+
+                var semGroup = studyplansubject.GroupBy(x => x.Semester).ToList();
+
+                //tableitems 
+                var tableItemsSelectSubject = new List<TableItemsSelectSubject>();
+
+                //I made an instance f a List<TableItems> where I use foreach loop to add data to this list
+                foreach (var group in semGroup)
                 {
-                    Semester = group.First().Semester.ToString(),
-                    CheckItems = group.Select(x => new SubjectCheckItems()
+                    tableItemsSelectSubject.Add(new TableItemsSelectSubject()
                     {
-                        SubjectCode = x.SubjectCode,
-                        SubjectDescription = x.SubjectDescription,
-                        SubjectTitle = x.SubjectTitle,
-                        Semester = x.Semester.ToString(),
-                        Result = Student_StudyplanManager.FindSubjectGrade(x.SubjectCode), //can be stored in student info
-                        Prerequisite_SubjectCode = Student_StudyplanManager.FindPrerequisite(x.SubjectCode), //for presentation only
-                        IsPrerequisiteSatisfied = Student_StudyplanManager.IsPrerequisiteCompleted(x.SubjectCode), //logic
-                        IsChecked = false
-                    }
-                    ).ToList(),
-                });
-            };
-            //ViewModel instance 
-            CrnVM viewModel = new CrnVM();
+                        Semester = group.First().Semester.ToString(),
+                        CheckItems = group.Select(x => new SubjectCheckItems()
+                        {
+                            SubjectCode = x.SubjectCode,
+                            SubjectDescription = x.SubjectDescription,
+                            SubjectTitle = x.SubjectTitle,
+                            Semester = x.Semester.ToString(),
+                            Result = Student_StudyplanManager.FindSubjectGrade(x.SubjectCode), //can be stored in student info
+                            Prerequisite_SubjectCode = Student_StudyplanManager.FindPrerequisite(x.SubjectCode), //for presentation only
+                            IsPrerequisiteSatisfied = Student_StudyplanManager.IsPrerequisiteCompleted(x.SubjectCode), //logic
+                            IsChecked = false
+                        }
+                        ).ToList(),
+                    });
+                };
 
-            //Pass all the data I need from the objects to the viewmodel
-            viewModel.Name = studentInfo.Name;
-            viewModel.TableItemsSelectSubject = tableItemsSelectSubject;
-            viewModel.QualCode = studentInfo.Qualification.QualCode;
+                //ViewModel instance 
+                CrnVM viewModel = new CrnVM();
 
-            
-            
-            //pass the ViewModel to the View
-            return View(viewModel);
+                //Pass all the data I need from the objects to the viewmodel
+                viewModel.Name = studentInfo.Name;
+                viewModel.TableItemsSelectSubject = tableItemsSelectSubject;
+                viewModel.QualCode = studentInfo.Qualification.QualCode;
+
+                //pass the ViewModel to the View
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+
         }
 
 
@@ -156,7 +165,8 @@ namespace sphelper_try1.Controllers
 
             //save last item to memory 
             var dateNow = DateTime.Now;
-            var expriryDate = dateNow.AddDays(14);
+            //var expriryDate = dateNow.AddDays(14);
+            var expriryDate = dateNow.AddMinutes(2);
             MemoryCache.Default.Add("mycrns", viewModel, expriryDate);
 
             return View("Index", viewModel);

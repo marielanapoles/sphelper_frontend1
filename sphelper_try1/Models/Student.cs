@@ -11,7 +11,8 @@ namespace sphelper_try1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class student
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +25,15 @@ namespace sphelper_try1.Models
         public string StudentID { get; set; }
         public string GivenName { get; set; }
         public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Please enter Email Address.")]
         public string EmailAddress { get; set; }
+
+
+        [Required(ErrorMessage = "Please enter Password.")]
+        //[("Password")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<student_grade> student_grade { get; set; }

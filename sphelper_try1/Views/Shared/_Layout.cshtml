@@ -10,7 +10,7 @@
 <body>
     <div class="showcase">
         <div class="menubar">
-            @Html.ActionLink("SP Helper", "Index", "Home", new { area = "" }, new { @class = "navbar-brand logo" })
+            @Html.ActionLink("SP Helper", "RedirectToIndex", "Home", new { area = "" }, new { @class = "navbar-brand logo" })
                 <img src="~/Content/img/menu.png"  id="toggle"/>
         </div>
 
@@ -26,11 +26,11 @@
     <div class="menu">
         @* <ul class="nav navbar-nav"> *@
         <ul class="">
-            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-            <li>@Html.ActionLink("Study Plan", "Index", "Studyplan_Subject")</li>
-            <li>@Html.ActionLink("Select Subject", "SelectSubject", "Studyplan_Subject")</li>
-            <li>@Html.ActionLink("My CRNs", "Index", "Studyplan_Subject")</li>
-            <li>@Html.ActionLink("Seek Advice", "Index", "Studyplan_Subject")</li>
+            <li>@Html.ActionLink("Home", "RedirectToIndex", "Home")</li>
+            <li>@Html.ActionLink("View Studyplan", "Index", "Studyplan_Subject")</li>
+            <li>@Html.ActionLink("Select Subject", "SelectSubjectForCRN",  "CRN")</li>
+            <li>@Html.ActionLink("My CRNs", "Index", "CRN")</li>
+            <li>@Html.ActionLink("Seek Advice", "SeekAdvice", "Home")</li>
             <li class="logout">@Html.ActionLink("Log out", "Index", "LogIn")</li>
         </ul>
     </div>

@@ -16,40 +16,63 @@ namespace sphelper_try1.Controllers
         private string[] Lecturers = { "IT Studies", "Kym Bond", "KT Lau" };
         private string s_id = "001061329";
 
-        public ActionResult Index(string studentId)
+        public ActionResult RedirectToIndex()
         {
-            studentId = s_id;
-            //get student name
-            var studentName = Student_StudyplanManager.FindstudentName(studentId);
+            var studentInSession = Session["Student"] as student;
+            return RedirectToAction("Index", studentInSession);
+        }
 
-            //get qualification, tafecode & national code
-            var qualification = Student_StudyplanManager.FindQualificationByStudentId(studentId);
 
-            //get study plan for each student
-            var studyPlanCode = Student_StudyplanManager.FindStudyplanByQualificaitonCode(qualification.QualCode);
+        //public ActionResult Index(string studentId)
+        public ActionResult Index(student obj)
+        {
+            string studentId = obj.StudentID;
+            if (Session["StudentID"] != null)
+            {
+                //get student name
+                var studentName = Student_StudyplanManager.FindstudentName(studentId);
 
-            //get gradeslist for student 
-            List<SubjectResults> subjectResultsList = Student_StudyplanManager.FindStudentGradeList(studentId);
+                //get qualification, tafecode & national code
+                var qualification = Student_StudyplanManager.FindQualificationByStudentId(studentId);
 
-            var date = DateTime.Now;
+                //get study plan for each student
+                var studyPlanCode = Student_StudyplanManager.FindStudyplanByQualificaitonCode(qualification.QualCode);
 
-            var student = new studentinfo();
-            student.StudentId = studentId;
-            student.Name = studentName;
-            student.Qualification = qualification;
-            student.StudyPlanCode = studyPlanCode;
-            student.StudyPlanSubjects = Student_StudyplanManager.GetStudyPlanByStudentId(studyPlanCode);
-            student.SemesterNow = Student_StudyplanManager.GetCurrentSemester(date);
-            student.SubjectResultsList = Student_StudyplanManager.FindStudentGradeList(studentId);
+                //get gradeslist for student 
+                List<SubjectResults> subjectResultsList = Student_StudyplanManager.FindStudentGradeList(studentId);
 
-            var viewModel = new HomeVM();
-            viewModel.StudentInfo = student;
+                var date = DateTime.Now;
 
-            //memory cache
-            var expirydate = date.AddDays(1);
-            MemoryCache.Default.Add("studentinfo", student, expirydate);
+                var student = new studentinfo();
+                student.StudentId = studentId;
+                student.Name = studentName;
+                student.Qualification = qualification;
+                student.StudyPlanCode = studyPlanCode;
+                student.StudyPlanSubjects = Student_StudyplanManager.GetStudyPlanByStudentId(studyPlanCode);
+                student.SemesterNow = Student_StudyplanManager.GetCurrentSemester(date);
+                student.SubjectResultsList = Student_StudyplanManager.FindStudentGradeList(studentId);
 
-            return View(viewModel);
+                var viewModel = new HomeVM();
+                viewModel.StudentInfo = student;
+
+                //memory cache
+                var expirydate = date.AddDays(1);
+                MemoryCache.Default.Add("studentinfo", student, expirydate);
+
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+        }
+
+        public ActionResult Error()
+        {
+            var studentInSession = Session["Student"] as student;
+            
+            return View(studentInSession);
         }
 
         public ActionResult SeekAdvice()
@@ -180,7 +203,11 @@ namespace sphelper_try1.Controllers
             //Resultado: si envio pero puede sacar un error acerca de no encontrar el view SendEmail.cshtml,
             //se debb crear su correspondiente View: 
 
-            return View();
+
+            //return View();
+            var studentInSession = Session["Student"] as student;
+
+            return View(studentInSession);
         }
     }
 }
